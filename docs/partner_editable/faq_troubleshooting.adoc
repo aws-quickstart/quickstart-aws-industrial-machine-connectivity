@@ -9,18 +9,18 @@
 
 *Q.* I encountered a *CREATE_FAILED* error when I launched the Quick Start.
 
-*A.* If AWS CloudFormation fails to create the stack, we recommend that you relaunch the template with *Rollback on failure* set to *No*. (This setting is under *Advanced* in the AWS CloudFormation console, *Options* page.) With this setting, the stack’s state is retained and the instance is left running, so you can troubleshoot the issue. (For Windows, look at the log files in %ProgramFiles%\Amazon\EC2ConfigService and C:\cfn\log.)
+*A.* If AWS CloudFormation fails to create the stack, relaunch the template with *Rollback on failure* set to *Disabled*. This setting is under *Advanced* in the AWS CloudFormation console on the *Configure stack options* page. With this setting, the stack’s state is retained, and the instance keeps running so that you can troubleshoot the issue. (For Windows, look at the log files in `%ProgramFiles%\Amazon\EC2ConfigService` and `C:\cfn\log`.)
 // If you’re deploying on Linux instances, provide the location for log files on Linux, or omit this sentence.
 
-WARNING: When you set *Rollback on failure* to *Disabled*, you continue to incur AWS charges for this stack. Please make sure to delete the stack when you finish troubleshooting.
+WARNING: When you set *Rollback on failure* to *Disabled*, you continue to incur AWS charges for this stack. Delete the stack when you finish troubleshooting.
 
-For additional information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html[Troubleshooting AWS CloudFormation^] on the AWS website.
+For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html[Troubleshooting AWS CloudFormation^].
 
-*Q.* I encountered a size limitation error when I deployed the AWS CloudFormation templates.
+*Q.* I encountered a size-limitation error when I deployed the AWS CloudFormation templates.
 
-*A.* We recommend that you launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template size limitations. For more information about AWS CloudFormation quotas, see the http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS documentation^].
+*A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* Can I update a stack to a different deployment type (Physical, Virtual) or dataflow option (Option1, 2a, 2b)? 
+*Q.* Can I update a stack to a different deployment type (physical, virtual) or dataflow option (Option1, 2a, 2b)? 
 
 *A.* Updates are currently not supported. To achieve a different deployment type or dataflow type, you'll need to deploy a new stack. See the details on having more than one stack deployed in an account below, and then decide whether or not you’ll want to delete your original stack before re-creating another.
 
@@ -49,16 +49,16 @@ For additional information, see https://docs.aws.amazon.com/AWSCloudFormation/la
 
 *A.* Yes. Fail2ban is installed and enabled on the device, which bans IPs that show the following malicious signs: 
 
-* Too many password failures
-* Seeking for exploits
+* Too many password failures.
+* Seeking exploits.
 * Additionally, shared memory on the device is secured via /etc/fstab.
 
-*Q.* Can I re-run the AMC to create new models and assets? 
+*Q.* Can I rerun the AMC to create new models and assets? 
 
 *A.* Yes. Follow these steps:
 
 . If any of the models/assets you want to create share a name with the models/assets created in the first pass of the AMC execution, you’ll need to delete the models and assets in SiteWise.
-. The second action you’ll need to take is clearing out the following DynamoDB tables associated with the initial IMC Quick Start deployment:
+. The second action you’ll need to take is clearing out the following DynamoDB tables associated with the initial {partner-product-short-name} Quick Start deployment:
 .. Table 1: `[stack-name]-asset-model-table`
 .. Table 2: `[stack-name]-asset-table`
 
@@ -75,7 +75,7 @@ Depending on the AMC driver you used, you’ll need to take the follow actions t
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
 image::../images/RefreshBirthCertificates.png[Architecture,width=648,height=439]
 
-.. This action triggers the IMC Quick Start’s AMC, which creates the models and assets that represent the Ignition hierarchy in SiteWise. 
+.. This action triggers the {partner-product-short-name} Quick Start’s AMC, which creates the models and assets that represent the Ignition hierarchy in SiteWise. 
 
 *AMC Driver: IgnitionFileExport*
 
@@ -100,7 +100,7 @@ Pre-Requisites:
 ** The data source will be the S3 bucket that receives data via the AWS IoT Core rule. The S3 bucket is named: `[stack_name_here]-imcs3bucket-[hash]`
 ** Navigate to the Amazon QuickSight console home page and click `New analysis`, select `New dataset`, then select the Amazon S3 service icon. 
 ** Add details for the dataset:
-** Data source name: Provide a name for the IMC data set such as “IMC-QS-Dataset”
+** Data source name: Provide a name for the {partner-product-short-name} data set such as “IMC-QS-Dataset”
 *** Manifest file: Leave the “URL” radio button selected for the “Upload a manifest file” text entry option and paste the S3 URL of the S3 bucket manifest file. The manifest file is located in the same S3 bucket where the data is stored (S3 bucket name: [stack_name_here]-imcs3bucket-[hash]). The manifest file is named “imcquicksightdata.json”. The S3 URL will follow this naming convention: `https:// [stack_name_here]-imcs3bucket-[hash].s3.amazonaws.com/imcquicksightdata.json`
 
 *Q.*
@@ -118,7 +118,7 @@ Pre-Requisites:
 .. The data source will be the S3 bucket that receives data via the AWS IoT Core rule. The S3 bucket is named: [stack_name_here]-imcs3bucket-[hash]
 .. Navigate to the Amazon QuickSight console home page and click “New analysis”, select “New dataset”, then select the Amazon S3 service icon. 
 .. Add details for the dataset:
-... Data source name: Provide a name for the IMC data set such as “IMC-QS-Dataset”
+... Data source name: Provide a name for the {partner-product-short-name} dataset such as “IMC-QS-Dataset”
 ... Manifest file: Leave the “URL” radio button selected for the “Upload a manifest file” text entry option and paste the S3 URL of the S3 bucket manifest file. The manifest file is located in the same S3 bucket where the data is stored (S3 bucket name:
 .... `[stack_name_here]-imcs3bucket-[hash]`. 
 ... The manifest file is named “imcquicksightdata.json”. The S3 URL will follow this naming convention:
@@ -127,7 +127,7 @@ Pre-Requisites:
 
 == Troubleshooting
 
-==== Quarantined certificate in Ignition doesn't show up (or data doesn’t show up for Data Flow Option 1 deployments)
+*Quarantined certificate in Ignition doesn't show up (or data doesn’t show up for Data Flow Option 1 deployments)*
 
 First, verify that the Ignition trial period (2 hours) has not expired. If that action does not remediate the issue, repeat the process of refreshing the SiteWise Gateway:
 
@@ -142,7 +142,7 @@ First, verify that the Ignition trial period (2 hours) has not expired. If that 
 
 
 
-==== Can’t access Ignition Web UI
+*Can’t access Ignition Web UI*
 
 Ensure that you’re attempting to make the connection from the same network you defined as “Your Public IP” while setting up the stack. If you’re attempting from a different network, you’ll need to edit the security group associated with the two EC2 instances (it is the same security group). 
 
@@ -151,7 +151,7 @@ Ensure that you’re attempting to make the connection from the same network you
 . Scroll to the right and click on the Security Group associated with the EC2 instance 
 . Edit the “inbound” rules for the rule associated with port 8088 to match the IP address you’re attempting the connection from. 
 
-==== Narrowing Ignition/Greengrass Permissions (for workload template deployments only)
+*Narrowing Ignition/Greengrass Permissions (for workload template deployments only)*
 
 . Navigate to the EC2 console
 . Take note of the private IP addresses of the following
@@ -162,7 +162,7 @@ Ensure that you’re attempting to make the connection from the same network you
 . Edit the rule associated with port 8883 and replace “0.0.0.0/0” with the private IP address for the Ignition EC2 instance
 . Edit the rule associated with port 62541 and replace “0.0.0.0/0” with the private IP address for the Greengrass EC2 instance
 
-==== Models and assets weren’t created in SiteWise
+*Models and assets weren’t created in SiteWise*
 
 If models and assets were not created in SiteWise and the Cirrus Link AMC Driver was used, follow these steps to troubleshoot. Post Deployment Cirrus Link Module Configuration
 . Navigate to MQTT Transmission settings in the Ignition console
