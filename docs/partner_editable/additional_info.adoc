@@ -4,20 +4,23 @@
 //== Test the deployment
 // If steps are required to test the deployment, add them here. If not, remove the heading
 
-== Post deployment steps
+== Post-deployment steps
 // If Post-deployment steps are required, add them here. If not, remove the heading
 
 
 //Reference post-deployment.adoc file
 include::./post_deployment.adoc[]
 
-Depending upon which deployment configuration you chose, there are different post deployment configuration steps.
+Depending upon which deployment configuration you chose, there are different post-deployment configuration steps. Follow the steps documented in the appropriate guide:
 
-* Link to Virtual deployment guide
-* Link to Physical greenfield deployment guide
-* Link to Physical brownfield deployment guide
+* Link to virtual deployment guide
+* Link to physical greenfield deployment guide
+* Link to physical brownfield deployment guide
 
-//== Best practices for using {partner-product-name} on AWS
+//TODO Shivansh, Where should these links (above) point? 
+//TODO Shivansh, What are the titles of the three guides exactly as they appear in those guides?
+
+//== Best practices for using the {partner-product-short-name} Quick Start on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
 
 //_Add any best practices for using the software._
@@ -35,44 +38,48 @@ Depending upon which deployment configuration you chose, there are different pos
 * Guide for Creating AMC drivers (link to external document)
 * AMC approved DyanamoDB table format (link to external document)
 * Adding a line and device to an Ignition project (link to external document)
-* Extending/modifying the IMC Quick Start with new features and capabilities (link to external document)
+* Extending/modifying the {partner-product-short-name} Quick Start with new features and capabilities (link to external document)
 
-=== Asset Model Converter
+//TODO Shivansh, What are these links (above)? 
+//TODO Shivansh, What are the titles of the four docs exactly as they appear in those docs?
 
-The asset model converter (AMC) code is in two separate lambda functions located in the functions/source directory of the repository
+=== Asset model converter
+
+The asset model converter (AMC) code is in two separate Lambda functions located in the functions/source directory of the repository.
 
 * AssetModelIngestion
-** This is the ingestion lambda. It’s purpose is to listen to MQTT messages coming from the CirusLink Ignition module and put them into the incoing S3 bucket as objects. The relevant handler file is “assetModelIngestion.py”. 
+** This is the ingestion Lambda function. Its purpose is to listen to MQTT messages coming from the CirusLink Ignition module and put them into the incoming S3 bucket as objects. The relevant handler file is “assetModelIngestion.py”. 
 
 * AssetModelConverter
 ** The AMC really covers two functions – AMC1, and AMC2. 
 *** AMC1 
 **** This code is triggered via an S3 Object Creation trigger from the incoming bucket. It has it’s reserved concurrent executions set to 1, to ensure that only a single instance of the lambda can ever fire at once. This has been done because the Ignition CirrusLink module can birth the asset structure as multiple discrete MQTT messages, each of which become file objects in S3.
 **** The core logic of the AMC1 comes in the form of the main handler file, ‘assetModelConverter.py’. It contains the base lambda handler function, which in turn calls into the AssetModelConverter class to execute the handling of a given S3 object creation event. This code in turn calls the relevant Driver code to handle the asset structure files
-**** AMC Drivers 
-***** AMC Drivers in AMC1 are responsible for parsing the incoming asset structure file(s), and converting it into a normalized format that is then stored into DynamoDB. Please see the ‘Creating AMC Drivers’ section of the Getting Started guide for more details on creating drivers, and the DynamoDB normalized format.
+**** AMC drivers 
+***** AMC drivers in AMC1 are responsible for parsing the incoming asset structure file(s), and converting it into a normalized format that is then stored into DynamoDB. Please see the ‘Creating AMC Drivers’ section of the Getting Started guide for more details on creating drivers, and the DynamoDB normalized format.
 *** AMC2
 **** This relevant code file here is ‘createSitewiseResources.py’ This contains code to take the normalized DynamoDB format, and create relevant AWS IoT Sitewise assets and models from that format. Changes are marked in the DynamoDB table to various assets/models that require updates/creation.
 **** Additionally, all AWS IoT Sitewise interactions take place in the ‘sitewiseUtils.py’ code.
 
-NOTE: Please note that only additive changes are supported at this time.
+NOTE: Only additive changes are supported.
 
-**** The AMC2 process comes in the form of the following steps:
+**** The AMC2 process:
 
-. Model Creation
+. Model creation
 .. The DynamoDB models table is queried to look for models that require creation. Those are created in AWS IoT Sitewise.
-. Asset Creation
-.. The DynamoDB assets table is also queries, looking for records that are marked as needing creation. Those assets, instances of the models created during ‘Model Creation’ are then created in AWS IoT Sitewise.
-. Model Hierarchies
-.. In this step Models are associated with each other in a hierarchy that are tagged as having such a parent/child relationship.
-. Asset Associations
+. Asset creation
+.. The DynamoDB assets table is also queried, looking for records that are marked as needing creation. Those assets, instances of the models created during ‘Model Creation’ are then created in AWS IoT Sitewise.
+. Model hierarchies
+.. In this step models are associated with each other in a hierarchy that are tagged as having such a parent/child relationship.
+. Asset associations
 .. Similarly in this final step, assets that are tagged as having a parent/child relationship are associated with each.
 
-=== Creating AMC Drivers
+=== Creating AMC drivers
 
-Instructions:
+. Write the driver that interprets the incoming hierarchy data from your edge-based asset modeling software and converts it into the AMC-approved format (see the format here) and puts it into DynamoDB.
 
-. Write the driver that interprets the incoming hierarchy data from your edge-based asset modeling software and converts it into the AMC-approved format (see the format here) and puts it into DynamoDB
+//TODO Shivansh, In the previous sentence, what does "here" refer to?
+
 .. Refer to the template file for guidance while writing your driver:
 ... `/functions/source/AssetModelConverter/drivers/example_driver_template.py`
 .. ** Highly recommended – also refer to the existing drivers: 
@@ -86,9 +93,9 @@ Instructions:
 ... `[name_of_driver]:[name_of_driver_class]`
 . Replace the AssetModelConverter zip file with its new contents:
 .. Zip up the contents of `/functions/source/AssetModelConverter/`
-.. Name the zip file above `AssetModelConverter.zip`
+.. Name the .zip file above `AssetModelConverter.zip`
 .. Replace the old `AssetModelConverter.zip` file (`/functions/packages/AssetModelConverter/AssetModelConverter.zip`) with the new `AssetModelConverter.zip` file you created above. 
-. Edit the CloudFormation template to include your driver’s name: 
+. Edit the AWS CloudFormation template to include your driver’s name: 
 .. `/templates/IMC-workload.template.yaml`
 ... Add an item to the list of AMCDrivers (parameter section):
 .... `- [name_of_driver_here]`
@@ -98,7 +105,7 @@ Instructions:
 
 ==== Artifacts
 
-The following directories and files are necessary for running an IMC Quick Start deployment: 
+The following directories and files are necessary for running an {partner-product-short-name} Quick Start deployment: 
 
     functions/
     scripts/
@@ -108,13 +115,13 @@ The following directories and files are necessary for running an IMC Quick Start
     README.md
 
 * *quickstart-IMC/*: The root directory in the S3 bucket, where the rest of the folders live.
-* *functions/*: Contains zipped lambda code that is used for various pieces of the IMC Quick Start.
+* *functions/*: Contains zipped lambda code that is used for various pieces of the {partner-product-short-name} Quick Start.
 * *scripts/*: Contains the scripts that are run on physical hardware if running a physical deployment.
 * *templates/*: Contains the various CloudFormation templates that will be deployed depending on the deployment options selected during stack creation.
 
-==== AMC-Approved DynamoDB Format
+==== AMC-approved DynamoDB format
 
-Asset Model Table Name:
+Asset mModel table name:
  
  [name-of-stack]-asset-model-table
 
@@ -136,7 +143,7 @@ assetModelEntry = {
     }
 ....
 
-Asset Table Name:
+Asset table name:
 
  [name-of-stack]-asset-table
 
@@ -174,10 +181,10 @@ assetEntry = {
 .. Tag 1: Temperature
 .. To the left of the “Properties” section, click the “Add Tag” button, and select OPC Tag: 
 
-.Ignition Designer - Add Tag
+.Ignition Designer - Add tag
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/IgnitionAddTag.png[Architecture,width=648,height=439]
+image::../images/IgnitionAddTag.png[Add tag]
 
 Next, edit the “Basic Properties” of the tag:
 
@@ -188,10 +195,10 @@ Next, edit the “Basic Properties” of the tag:
 . Ensure your tag configuration looks similar to the UI screenshot below:
 . Click “Apply” and “OK” to accept the tag configuration.
 
-.Ignition Designer - Tag Configuration
+.Ignition Designer - Configure tag
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/IgnitionTagConfiguration.png[Architecture,width=648,height=439]
+image::../images/IgnitionTagConfiguration.png[Configure tag]
 
 Create a second tag to represent "Pressure"
 
@@ -215,10 +222,10 @@ Create a third tag to represent "Vibration"
 .. Click “Apply” and “OK” to accept the Pump configuration.
 .. By the time you’re finished adding all your tags, the Pump should look like this:
 
-.Ignition Designer - Pump Tag Structure
+.Ignition Designer - Pump tag structure
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/PumpTagStructure.png[Architecture,width=648,height=439]
+image::../images/PumpTagStructure.png[Pump tag structure]
 
 Add the line to the project:
 
@@ -228,71 +235,71 @@ Add the line to the project:
 . Trigger a birth message:
 .. Under the Tag Browser, expand Tag Providers, expand default, expand Sim Controls. To the right of “New Birth”, check the checkbox and “Write Once”. 
 
-*This triggers an MQTT message that defines your new hierarchy, with Line 4 and the Pump included. You should see your new models and assets in SiteWise.*
+*This initiates an MQTT message that defines your new hierarchy, with Line 4 and the pump included. You should see your new models and assets in SiteWise.*
 
-==== Setting up a QuickSight dashboard along with the IMC Quick Start deployment
+==== Set up a QuickSight dashboard along with the {partner-product-short-name} Quick Start deployment
 
-After the IMC Quick Start deployment succeeds (models and assets have finished creation in AWS IoT SiteWise), the following manual steps are required to create a QuickSight dataset. 
+After the {partner-product-short-name} Quick Start deployment succeeds (models and assets have finished creation in AWS IoT SiteWise), the following manual steps are required to create a QuickSight dataset. 
 
-. Allow QuickSight access to the S3 bucket that houses the data from the IMC Quick Start. 
+. Allow QuickSight access to the S3 bucket that houses the data from the {partner-product-short-name} Quick Start. 
 .. Navigate to the Manage QuickSight from the top right corner navbar.
 
 .QuickSight - Manage QuickSight
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QSManageQS.png[Architecture,width=648,height=439]
+image::../images/QSManageQS.png[Manage QuickSight]
 
 Navigate to “Security & permissions”, then click “Add or remove” under “QuickSight access to AWS services.
 
-.QuickSight - Security and Permissions
+.QuickSight - Security and permissions
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QSSecurityAndPermissions.png[Architecture,width=648,height=439]
+image::../images/QSSecurityAndPermissions.png[Security and permissions]
 
 Click on the checkbox to the right of “Amazon S3” under “QuickSight access to AWS services”.
 
-.QuickSight - Access to AWS Services
+.QuickSight - Access to AWS services
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QSAccessToServices.png[Architecture,width=648,height=439]
+image::../images/QSAccessToServices.png[Access to AWS services]
 
-Find the S3 bucket labeled `[IMCQSDeploymentName]...-imcs3bucket-….`, click the checkbox on the left side, and click “Finish”.
+Find the S3 bucket labeled `[IMCQSDeploymentName]...-imcs3bucket-….`, select the checkbox on the left side, and click “Finish”.
 
-.QuickSight - Select S3 Bucket
+.QuickSight - Select S3 bucket
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QSSelectS3Bucket.png[Architecture,width=648,height=439]
+image::../images/QSSelectS3Bucket.png[Select S3 bucket]
 
 Navigate to the IoT Console, click “Test” on the navbar on the left-hand side of the screen to arrive at the MQTT client.
 
-.AWS IoT Core - Test Client
+.AWS IoT Core - Test client
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QS-MQTT-Client.png[Architecture,width=648,height=439]
+image::../images/QS-MQTT-Client.png[Test client]
 
 Trigger the creation of your QuickSight dataset by publishing an MQTT message to the MQTT topic: `imc/control/quicksight`. The content of the message is inconsequential.
 
-.AWS IoT Core - MQTT Publish Message
+.AWS IoT Core - MQTT publish message
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QS-MQTT-Publish.png[Architecture,width=648,height=439]
+image::../images/QS-MQTT-Publish.png[MQTT publish message]
 
-After the message is published, a Dataset called “imcDataSet” will populate in the QuickSight Dataset dashboard. Click into the Dataset to create a visualization analysis.
+After the message is published, a Dataset called “imcDataSet” populates the QuickSight Dataset dashboard. Click into the Dataset to create a visualization analysis.
 
-.QuickSight Datasets
+.QuickSight datasets
 //[link=images/architecture_diagram.png]
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
-image::../images/QS-Datasets.png[Architecture,width=648,height=439]
+image::../images/QS-Datasets.png[QuickSight datasets]
 
-Now that there is a dataset created in QuickSight, you are able to create visualizations with the data. Refer to the https://docs.aws.amazon.com/quicksight/latest/user/welcome.html[QuickSight documentation] for more details.
+Now that there is a dataset created in QuickSight, you can create visualizations with the data. For more details, see https://docs.aws.amazon.com/quicksight/latest/user/welcome.html[What Is Amazon QuickSight?^].
 
-==== Launching CloudFormation stack from your own S3 bucket
+==== Launch the AWS CloudFormation stack from your own S3 bucket
 
-This section details how developers who wish to extend/modify the IMC Quick Start with new features/capabilities. They should clone the public Quick Start repo (https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity), create a new S3 bucket and add the repo assets to that bucket. The following instructions detail the process:
+This section details how developers who wish to extend/modify the {partner-product-short-name} Quick Start with new features/capabilities. You clone the https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity[public Quick Start repo^], create a new S3 bucket, and add the repo assets to that bucket. The following instructions detail the process:
 
 . Create a new S3 bucket and give it a unique name such as “imc-dev-123”
 . In that S3 bucket, create a folder called “quickstart-IMC”
-. Download the public IMC Quick Start Github repo (https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity) as a zip file.
+. Download the public {partner-product-short-name} Quick Start Github repo (https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity) as a zip file.
 . Unzip the downloaded file and copy all the contents of the unzipped folder (Github repo contents) into the “quickstart-IMC” folder in your S3 bucket. The structure will then resemble the structure below:
 .. S3 bucket name: `imc-dev-123`
 .. S3 bucket content:

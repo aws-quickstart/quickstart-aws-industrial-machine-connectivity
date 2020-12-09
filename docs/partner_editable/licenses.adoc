@@ -1,9 +1,11 @@
 // Include details about the license and how they can sign up. If no license is required, clarify that. 
 
-There are no licenses required to deploy this Quick Start. All AWS service resources consumed during the launch of the Quick Start will be incurr AWS service usage costs.
+There are no licenses required to deploy this Quick Start. All AWS service resources consumed during the launch of the Quick Start will incur AWS service usage costs.
 
-Some configurations of the IMC Quick Start will involve the use of 3rd party software and the user is responsible for obtaining a license directly from the software vendor. The 2 software vendors that have products that integrate with the IMC Quick Start are:
+Some configurations of the {partner-product-short-name} Quick Start will involve the use of third-party software. The user is responsible for obtaining a license directly from the software vendor. Two software vendors have products that integrate with the {partner-product-short-name} Quick Start:
 
 . Inductive Automation (Ignition Server)
 * Cirrus Link Solutions' MQTT Transmission Module supported
 . PTC (KEPServerEX)
+
+//TODO Marcia, Check how this list looks. It's supposedly showing two software vendors, so I'm not sure why it shows three lines.

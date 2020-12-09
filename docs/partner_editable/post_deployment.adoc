@@ -1,19 +1,20 @@
-// This doc is for the "Post deployment steps section"
+// This doc is for the "Post-deployment steps" section
 // Current URL: https://aws-quickstart.github.io/quickstart-aws-industrial-machine-connectivity/#_post_deployment_steps
 
 
-
-=== Post-Deployment Steps
-Stack deployment will take approximately 10 minutes. You can track the progress of the stack launch by viewing the “Events” tab of the CloudFormation stack console. Once the CloudFormation stack is completed, follow the steps to configure the IMC Quick Start to make it operational. The Post-Deployment steps include the following sections:
+=== Post-deployment steps
+When the CloudFormation stack is completed, follow these steps to configure the {partner-product-short-name} Quick Start to make it operational. The post-deployment steps include the following sections:
 
 . <<Edge Devices (Physical Deployments Only)>>
 . <<Edge Software Deployment (Physical Deployments Only)>>
-. <<Asset Model Convertner (AMC) Initiation>>
+. <<Asset Model Converter (AMC) Initiation>>
 . <<SiteWise Connector Activation>>
 . <<Validate Incoming Data>>
 
+//TODO Marcia to check these list items (links?) in the generated guide after editing the subheads for capitalization, etc. (or delete the links?).
+
 ==== Edge Devices (Physical Deployments Only)
-The physical brownfield deployment is intended to demonstrate the capabilities of the IMC Quick Start in an environment where the end user has an existing edge-based asset modeling software (such as Ignition or KepServer). It is deployed onto physical hardware. After deployment, the physical hardware will run Greengrass software and connect into the edge-based asset modeling software. The IMC Quick Start supports the following OEM devices: 
+The physical brownfield deployment is intended to demonstrate the capabilities of the {partner-product-short-name} Quick Start in an environment where the end user has an existing edge-based asset modeling software (such as Ignition or KepServer). It is deployed onto physical hardware. After deployment, the physical hardware will run Greengrass software and connect into the edge-based asset modeling software. The {partner-product-short-name} Quick Start supports the following OEM devices: 
 
 * Lenovo
 ** Model: ThinkCentre M90n IoT
@@ -40,13 +41,13 @@ The physical brownfield deployment is intended to demonstrate the capabilities o
 ==== Edge Software Deployment (Physical Deployments Only)
 NOTE: This step is only necessary if deploying one of the physical deployment options (Physical-Greenfield/Physical-Brownfield)
 
-NOTE: You must have the AWS CLI configured to point to the AWS account you’re using for the IMC Quick Start.
+NOTE: You must have the AWS CLI configured to point to the AWS account you’re using for the {partner-product-short-name} Quick Start.
 
 NOTE: The Physical-Brownfield deployment mode does not come with a configured set of project tags similar to the virtual deployment but does come with a set of device simulations that can be configured to represent a project tag structure similar to the virtual deployment tag structure (or your own structure entirely). This deployment can be configured to work with a physical PLC test harness. 
 
 NOTE: The Physical-Greenfield deployment mode is compatible with either Inductive Automation’s Ignition Server (https://inductiveautomation.com/ignition/) or PTCs KEPServerEX (https://www.kepware.com/en-us/products/kepserverex/). This deployment option does not bootstrap any partner edge software. The only edge software application that is bootstrapped on the physical hardware as part of the deployment is AWS IoT Greengrass.
 
-===== Retrive the IMC Edge Device Bootup Script
+===== Retrieve the {partner-product-short-name} Edge Device Bootup Script
 . Retrieve and run the bootup script for the physical hardware device
 .. Open a terminal on the physical hardware
 .. Use the command line to become the root user in your terminal session: 
@@ -54,7 +55,7 @@ NOTE: The Physical-Greenfield deployment mode is compatible with either Inductiv
  sudo su
 
 .. Ensure you are in the `home/ubuntu` directory
-.. Use the command line to retrieve the deployment script from your stack’s S3 bucket. Before running this commmand, ensure you have the AWS CLI configured in the region where you are launching the IMC Quick Start CloudFormation stack.
+.. Use the command line to retrieve the deployment script from your stack’s S3 bucket. Before running this commmand, ensure you have the AWS CLI configured in the region where you are launching the {partner-product-short-name} Quick Start CloudFormation stack.
 .. In your home directory run this command to get the physical deployment bootup script from an S3 bucket:
 
  aws s3api get-object --bucket [DependenciesBucket] --key [BootupScript]
@@ -64,7 +65,7 @@ To get the values of the 2 options:
 - [DependenciesBucket]
 - [BootupScript]
 
-Open the CloudFormation service console, open the *NESTED* IMC Quick Start CloudFormation stack, select the *Outputs* tab and follow the instructions below:
+Open the AWS CloudFormation service console, open the *NESTED* {partner-product-short-name} Quick Start CloudFormation stack, choose the *Outputs* tab, and follow the instructions below:
 
 [cols="2,2a"]
 .Options
@@ -76,12 +77,14 @@ Open the CloudFormation service console, open the *NESTED* IMC Quick Start Cloud
 |Dependecies Bucket Name *_(see green text below for reference)_*
 
 |[BootupScript] 
-| Find key corresponding to your configuration:
+| Find the key corresponding to your configuration:
 
 * <<pre-reqs.adoc#BootupScriptGreenfieldOption1,BootupScriptGreenfieldOption1>>
 * <<pre-reqs.adoc#BootupScriptGreenfieldOption2a,BootupScriptGreenfieldOption2a>>
 * <<pre-reqs.adoc#BootupScriptGreenfieldOption2b,BootupScriptGreenfieldOption2b>>
 * <<pre-reqs.adoc#BootupScriptBrownfieldAllOptions,BootupScriptBrownfieldAllOptions>>	 
+
+//TODO Marcia, what do these four items above look like in the generated doc? And other similar references later in this file?
 
 and select its value *_(see blue text below for reference)_*
 |===
@@ -91,7 +94,7 @@ and select its value *_(see blue text below for reference)_*
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
 image::../images/DependenciesBucket.png[Architecture,width=648,height=439]
 
-===== Execute the IMC Edge Device Bootup Script
+===== Execute the {partner-product-short-name} Edge Device Bootup Script
 
 . Use the command line to make the file executable: 
   
@@ -99,7 +102,7 @@ image::../images/DependenciesBucket.png[Architecture,width=648,height=439]
 
 .. `[bootupScript]` was fetched in the previous step using `aws s3api get-object` CLI command described above.
 
-. Open the CloudFormation service console, open the *NESTED* IMC Quick Start CloudFormation stack, select the *Outputs* tab and copy the bootup CLI command from the *Value* of the Key:Value pairs below:
+. Open the CloudFormation service console, open the *NESTED* {partner-product-short-name} Quick Start CloudFormation stack, choose the *Outputs* tab, and copy the bootup CLI command from the *Value* of the following key:value pairs:
 
 [cols="2,2a"]
 .Options
@@ -108,7 +111,7 @@ image::../images/DependenciesBucket.png[Architecture,width=648,height=439]
 |*Value*
 
 | FullScriptParamsGreenfield1and2a
-| Copy the command from the CloudFormation *Value* column
+| Copy the command from the AWS CloudFormation *Value* column
 
 * This option is for: deployment type = <<pre-reqs.adoc#Physical-Greenfield,Physical-Greenfield>>, data flow option = <<pre-reqs.adoc#Option 1 (OPC-UA to SiteWise),Option 1 (OPC-UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>>
 
@@ -158,7 +161,7 @@ Represent your data in Ignition by creating a project tag hierarchy. The source 
 .. Username: admin
 .. Password: password
 ... If you haven’t already, it is recommended that you change your password once you’ve successfully logged into the Ignition web UI.
-. With the help of an OT professional or IMC Quick Start contact, represent your PLC data (simulated or real) in a hierarchy
+. With the help of an OT professional or {partner-product-short-name} Quick Start contact, represent your PLC data (simulated or real) in a hierarchy
 
 ==== Trigger an Sparkplug node “birth” message in Ignition
 
@@ -169,7 +172,7 @@ Represent your data in Ignition by creating a project tag hierarchy. The source 
 //image::../images/architecture_diagram.png[Architecture,width=648,height=439]
 image::../images/RefreshBirthCertificates.png[Architecture,width=648,height=439]
 
-This action triggers the IMC Quick Start’s asset model converter (AMC), which creates the models and assets that represent the Ignition hierarchy in SiteWise. 
+This action triggers the {partner-product-short-name} Quick Start’s asset model converter (AMC), which creates the models and assets that represent the Ignition hierarchy in SiteWise. 
 
 ==== Accept the OPC UA Client Certificate
 To enable the SiteWise to ingest data over OPC UA from Ignition’s OPC UA server, you must accept the certificate presented by the SiteWise connector within Ignition.
@@ -190,7 +193,7 @@ Select the Asset Model Connverter (AMC) Driver you configured in the CloudFormat
 * <<AMCDriver - IgnitionFileExport>>
 
 ===== AMCDriver - IgnitionCirrusLink
-This AMCDriver option runs automatically with the launch of the IMC Quick Start (Virtual Option). Proceed to the next section: <<SiteWise Connector Activation>>
+This AMCDriver option runs automatically with the launch of the {partner-product-short-name} Quick Start (Virtual Option). Proceed to the next section: <<SiteWise Connector Activation>>
 
 ===== AMCDriver - IgnitionFileExport
 In this section you will export the JSON file from Ignition Server that describes your project's tag hierarchy and upload it into an S3 bucket (created during CF stack formation) to initiate the AMC workflow.
@@ -365,11 +368,13 @@ Check the Lambda function responsible for creating the models and assets in Site
 .. Replace the Client Private Key File with the “.private” file from the tarball package
 .. Hit “Save Changes”, and make sure that the connectivity says “1 of 1”.
 
-=== CloudFormation Stack Cleanup
+=== AWS CloudFormation stack cleanup
 
-Follow these steps to clean up the IMC CloudFormation stack deployment:
+Follow these steps to clean up the Quick Start AWS CloudFormation stack deployment:
 
-==== Cloud Asset Cleanup
+==== Cloud asset cleanup
+
+//TODO Marcia to come back and clean up capitalization in subheads.
 
 . Navigate to the CloudFormation console and delete the base stack (not the stack named "NESTED"), in order to clean up the account as much as possible. Most of the resources will be deleted, but the stack deletion will fail due to non-empty S3 buckets and potentially a deployed Greengrass group (for all Virtual options by default, and for all Physical deployments that have been completed on a piece of hardware. The steps required to delete a stack are:
 .. Empty the S3 buckets:

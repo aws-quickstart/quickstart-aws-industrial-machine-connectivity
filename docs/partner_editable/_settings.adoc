@@ -1,10 +1,11 @@
 :quickstart-project-name: quickstart-aws-industrial-machine-connectivity
-:partner-product-name: Industrial machine connectivity
-:partner-company-name:
-:doc-month: August
+:partner-product-name: Industrial Machine Connectivity
+:partner-product-short-name: IMC
+//:partner-company-name:
+:doc-month: December
 :doc-year: 2020
-:partner-contributors:
-:quickstart-contributors: Thomas Cummins and Shivansh Singh, AWS
+//:partner-contributors:
+:quickstart-contributors: Thomas Cummins and Shivansh Singh, AWS Quick Start team
 :deployment_time: 10 minutes
 :default_deployment_region: us-east-1
 // Uncomment these two attributes if you are leveraging
