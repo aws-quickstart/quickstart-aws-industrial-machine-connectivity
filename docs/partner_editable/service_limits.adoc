@@ -1,4 +1,4 @@
-// Replace the <n> in each row to specify the number of resources used in this deployment. Remove the rows for resources that aren’t used.
+// Replace the <n> in each row to specify the number of resources used in this deployment. Remove the rows for resources that aren't used.
 |===
 |Resource |This deployment uses
 
