@@ -1,8 +1,6 @@
 This Quick Start supports the following Regions:
 
 * us-east-1, US East (N. Virginia)
-* us-west-2, US West (Ohio)
+* us-west-2, US West (Oregon)
 * eu-west-1, Europe (Ireland)
 * eu-central-1, Europe (Frankfurt)
-
-//TODO Shivansh, Should bullet 2 be us-west-2, US West (Oregon)? Or us-east-2, US East (Ohio)?
