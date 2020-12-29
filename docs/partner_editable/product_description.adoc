@@ -5,7 +5,7 @@
 //TODO Marcia to break these paragraphs down.
 :xrefstyle: short
 
-The primary objective of the Quick Start is to help partners deliver a fast, inexpensive proof of value. For example, a partner might deliver a proof-of-value deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop and deploy a complete production architecture that addresses all their critical use cases. 
+The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value for a minimum viable product (MVP). For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop and deploy a complete production architecture that addresses all their critical use cases. 
 
 The {partner-product-short-name} Quick Start converts definitions of a customer's asset hierarchy (such as factory, lines, machines, tags) from third-party (AWS Partner) edge software applications to equivalent definitions in AWS IoT SiteWise. Partner edge applications include Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] and PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^].
 
@@ -26,8 +26,8 @@ The AWS CloudFormation templates provision the cloud resources and generate the 
 
 This Quick Start includes the software and a list of hardware required to connect your assets to the AWS Cloud and visualize your data. It also includes the following modules (drivers):
 
-* Inductive Automation (Ignition)
-** Cirrus Link MQTT Module
+* Ignition by Inductive Automation
+** Cirrus Link MQTT (Message Queue Telemetry Transport) module
 ** Ignition Project File Export 
-* PTC (KEPServerEX)
-** KEPServerEX Project File Export 
+* KEPServerEX by PTC
+** KEPServerEX Project File Export

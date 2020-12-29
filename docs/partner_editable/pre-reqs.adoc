@@ -223,4 +223,4 @@ home/
 
 For Physical-Brownfield deployments with Ignition, ensure that you are using these minimum software versions:
 * Ignition: 8.0.12
-* Cirrus Link MQTT Transmission Module: 4.0.4-SNAPSHOT (b2020051210)
+* Cirrus Link MQTT transmission module: 4.0.4-SNAPSHOT (b2020051210)
