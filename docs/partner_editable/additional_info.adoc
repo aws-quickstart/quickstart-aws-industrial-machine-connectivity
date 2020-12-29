@@ -14,7 +14,7 @@
 //Reference post-deployment.adoc file
 include::./post_deployment.adoc[]
 
-Depending upon which deployment configuration you chose, there are different post-deployment configuration steps. Follow the steps documented in the appropriate guide:
+The configuration steps you follow after deploying this Quick Start depend on which deployment option you chose. Follow the steps documented in the appropriate guide:
 
 * Link to virtual deployment guide
 * Link to physical greenfield deployment guide
@@ -38,7 +38,7 @@ Depending upon which deployment configuration you chose, there are different pos
 
 //_Add any other details that will help the customer use the software on AWS._
 
-* Guide for Creating AMC drivers (link to external document)
+* Guide for creating AMC drivers (link to external document)
 * AMC approved DyanamoDB table format (link to external document)
 * Adding a line and device to an Ignition project (link to external document)
 * Extending or modifying the {partner-product-short-name} Quick Start with new features and capabilities (link to external document)
@@ -56,7 +56,7 @@ The Asset Model Converter (AMC) code is in two separate Lambda functions located
 * AssetModelConverter
 ** The AMC covers two functions: AMC1 and AMC2. 
 *** AMC1 
-**** This code is initiated by an S3 object creation from the incoming bucket. It has its reserved concurrent executions set to 1 to make sure that only a single instance of Lambda can ever fire at the same time. This has been done because the Ignition CirrusLink module can birth the asset structure as multiple discrete MQTT messages, each of which becomes a file object in S3.
+**** This code is initiated by an Amazon S3 object creation from the incoming bucket. It has its reserved concurrent executions set to 1 to make sure that only a single instance of Lambda can ever fire at the same time. This has been done because the Ignition Cirrus Link module can birth the asset structure as multiple discrete MQTT messages, each of which becomes a file object in Amazon S3.
 **** The core logic of the AMC1 comes in the form of the main handler file, `assetModelConverter.py`. It contains the base Lambda handler function, which in turn calls into the AssetModelConverter class to execute the handling of a given S3 object-creation event. This code in turn calls the relevant driver code to handle the asset structure files.
 **** AMC drivers 
 ***** AMC drivers in AMC1 are responsible for parsing the incoming asset structure files and converting them into a normalized format that is then stored into DynamoDB. See the "Creating AMC Drivers" section of the Getting Started guide for more details on creating drivers and the DynamoDB normalized format.
@@ -145,6 +145,7 @@ assetModelEntry = {
         }
     }
 ....
+//TODO Shivansh, This service name—AWS IoT SiteWise—"must always include 'AWS' in any content platform." Please make sure that this name is cited fully throughout the code, including comments. Then update any lines we quote in the docs, such as those above. (As needed, change "a" to "an" too.)
 
 Asset table name:
 
@@ -167,12 +168,12 @@ assetEntry = {
 
 ==== Add a line and device to an Ignition project
 
-. Navigate to the Ignition Designer and connect to your Ignition server.
-.. Launch the Designer.
+. Navigate to Ignition Designer and connect to your Ignition server.
+.. Launch Ignition Designer.
 .. Choose *Add Designer*. 
 .. Choose *Manually Add Gateway*.
-.. Add a Gateway URL in the following format (replacing the information in brackets): `http://<ignition_ec2_public_ip>:8088`
-.. Under the Gateway tile you just added, choose *Launch*. 
+.. Add a gateway URL in the following format (replacing the information in brackets): `http://<ignition_ec2_public_ip>:8088`
+.. Under the gateway tile you just added, choose *Launch*. 
 .. Supply the user name and password, and choose *Login*.
 ... User name: admin
 ... Password: password
@@ -238,7 +239,7 @@ Add the line to the project:
 . Initiate a birth message:
 .. Under the tag browser, expand *Tag Providers*, expand default, and expand *Sim Controls*. To the right of *New Birth*, and select the *Write Once* check box.
 
-This initiates an MQTT message that defines your new hierarchy, with Line 4 and the pump included. Your new models and assets now appear in SiteWise.
+This initiates an MQTT message that defines your new hierarchy, with Line 4 and the pump included. Your new models and assets now appear in AWS IoT SiteWise.
 
 ==== Set up a QuickSight dashboard along with the {partner-product-short-name} Quick Start deployment
 
@@ -314,3 +315,4 @@ LICENSE.txt
     	NOTICE.txt
     	README.md
 ....
+//TODO Shivansh, Table 7 and Table 10 describe the same parameters. We don't want that duplication, do we?

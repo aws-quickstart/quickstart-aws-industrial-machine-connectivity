@@ -30,11 +30,11 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Yes, you may deploy multiple stacks in the same account. Be wary of the following: 
 
-* For Option 1 deployments, SiteWise may receive data from multiple sources if there are, for example, two instances of Ignition that are publishing data onto the topic `/Tag Providers/default/Line1/CNC/Temperature`.
+* For Option 1 deployments, AWS IoT SiteWise may receive data from multiple sources if, for example, two instances of Ignition are publishing data onto the topic `/Tag Providers/default/Line1/CNC/Temperature`.
 
-* If SiteWise models and assets exist in the Cloud from a previous deployment, a new deployment does not recreate the model or asset hierarchy. Instead, the Asset Model Converter operates by recognizing any changes in the existing models or assets and the new deployment hierarchy. For example: 
-** If the previously deployed hierarchy is identical to the newly deployed one, nothing in SiteWise is changed.
-** If the newly deployed hierarchy has an identical structure to the previously deployed hierarchy with additional nodes that follow the hierarchy pattern, the new models or assets are created in SiteWise:
+* If AWS IoT SiteWise models and assets exist in the Cloud from a previous deployment, a new deployment does not recreate the model or asset hierarchy. Instead, the Asset Model Converter operates by recognizing any changes in the existing models or assets and the new deployment hierarchy. For example: 
+** If the previously deployed hierarchy is identical to the newly deployed one, nothing in AWS IoT SiteWise is changed.
+** If the newly deployed hierarchy has an identical structure to the previously deployed hierarchy with additional nodes that follow the hierarchy pattern, the new models or assets are created in AWS IoT SiteWise:
 *** Previous:
  
  Line 1/CNC1/Temperature
@@ -45,7 +45,7 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
  Line 1/CNC2/Temperature
 
 * If the newly deployed hierarchy has a different hierarchy than the previously deployed hierarchy altogether, the Asset Model Converter does not create the new models and assets.
-* Refer to the instructions in the appendix showing how to add a line and device with tags to a project in Ignition using the Ignition Designer.
+* Refer to the instructions in the appendix showing how to add a line and device with tags to a project in Ignition using Ignition Designer.
 
 *Q.* Does any hardening of the operating system occur during deployment? 
 
@@ -59,7 +59,7 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Yes. Follow these steps:
 
-. If any of the models or assets you want to create share a name with the models or assets created in the first pass of the AMC execution, you'll need to delete the models and assets in SiteWise.
+. If any of the models or assets you want to create share a name with the models or assets created in the first pass of the AMC execution, you'll need to delete the models and assets in AWS IoT SiteWise.
 . The second action you'll need to take is clearing out the following DynamoDB tables associated with the initial {partner-product-short-name} Quick Start deployment (replacing the information in brackets):
 .. Table 1: `<stack-name>-asset-model-table`
 .. Table 2: `<stack-name>-asset-table`
@@ -69,15 +69,15 @@ Depending on the AMC driver you used, take the follow actions to rerun the AMC:
 *AMC driver: IgnitionCirrusLink*
 
 Initiate a rebirth (NBIRTH,DBIRTH) MQTT message that represents the your project hierarchy.
-. Connect to your Ignition server in the Ignition Designer.
-. Launch the Ignition Designer, open the tag browser, and choose *Tag providers*, *MQTT Transmission*, *Transmission Control*. 
+. Connect to your Ignition server in Ignition Designer.
+. Launch Ignition Designer, open the tag browser, and choose *Tag providers*, *MQTT Transmission*, *Transmission Control*. 
 . Choose the *Refresh* button. A birth message is initiated.
 
 .Refresh Sparkplug Birth Certificates
 [link=images/RefreshBirthCertificates.png]
 image::../images/RefreshBirthCertificates.png[Refresh birth certificates]
 
-.. This action initiates the {partner-product-short-name} Quick Start's AMC, which creates the models and assets that represent the Ignition hierarchy in SiteWise. 
+.. This action initiates the {partner-product-short-name} Quick Start's AMC, which creates the models and assets that represent the Ignition hierarchy in AWS IoT SiteWise. 
 
 *AMC driver: IgnitionFileExport*
 
@@ -103,7 +103,7 @@ Prerequisites:
 ** Open the Amazon QuickSight console home page, and choose *New analysis*, *New dataset*. Then choose the *Amazon S3* service icon. 
 ** Add details for the dataset:
 ** Data source name: Provide a name for the {partner-product-short-name} dataset, such as *IMC-QS-Dataset*.
-*** Manifest file: Leave the *URL* radio button chosen for the *Upload a manifest file* text entry option, and paste the S3 URL of the S3 bucket manifest file. The manifest file is located in the same S3 bucket where the data is stored (S3 bucket name: `<stack_name>-imcs3bucket-<hash>`). The manifest file is named `imcquicksightdata.json`. The S3 URL follows this naming convention: `https:// <stack_name>-imcs3bucket-<hash>.s3.amazonaws.com/imcquicksightdata.json`.
+*** Manifest file: Leave the *URL* radio button chosen for the *Upload a manifest file* text entry option, and paste the URL of the S3 bucket manifest file. The manifest file is located in the same S3 bucket where the data is stored (S3 bucket name: `<stack_name>-imcs3bucket-<hash>`). The manifest file is named `imcquicksightdata.json`. The S3 URL follows this naming convention: `https:// <stack_name>-imcs3bucket-<hash>.s3.amazonaws.com/imcquicksightdata.json`.
 
 *Q.*
 How do I add a QuickSight visual?
@@ -120,8 +120,8 @@ Prerequisites:
 .. Open the Amazon QuickSight console, and choose *New analysis*, *New dataset*. Choose the Amazon S3 service icon. 
 .. Add details for the dataset:
 ... Data source name: Provide a name for the {partner-product-short-name} dataset, such as *IMC-QS-Dataset*.
-... Manifest file: Leave the *URL* radio button chosen for the *Upload a manifest file* text entry option, and paste the S3 URL of the S3 bucket manifest file. The manifest file is located in the same S3 bucket where the data is stored (S3 bucket name: `<stack_name>-imcs3bucket-<hash>`). 
-... The manifest file is named `imcquicksightdata.json`. The S3 URL follows this naming convention:
+... Manifest file: Leave the *URL* radio button chosen for the *Upload a manifest file* text entry option, and paste the URL of the S3 bucket manifest file. The manifest file is located in the same S3 bucket where the data is stored (S3 bucket name: `<stack_name>-imcs3bucket-<hash>`). 
+... The manifest file is named `imcquicksightdata.json`. The URL follows this naming convention:
 .... `https://<stack_name>-imcs3bucket-<hash>.s3.amazonaws.com/imcquicksightdata.json`
 
 
@@ -129,16 +129,16 @@ Prerequisites:
 
 *Quarantined certificate in Ignition doesn't show up (or data doesn't show up for dataflow option 1 deployments)*
 
-First, verify that the Ignition trial period (2 hours) has not expired. If that action does not remediate the issue, repeat the process of refreshing the SiteWise Gateway:
+First, verify that the Ignition trial period (2 hours) has not expired. If that action does not remediate the issue, repeat the process of refreshing the AWS IoT SiteWise gateway:
 
 . Open the AWS IoT SiteWise console, and choose *Ingest*, *Gateways*. 
 . Choose the gateway created during the stack launch (replacing the information in brackets):
 .. Naming convention: `<name_of_stack>_Automated_Gateway`
 . In the *Source Configuration for Automated Gateway Config* section, choose *Edit*.
-. Choose *Save* at the bottom. No changes are necessary. This action activates the SiteWise gateway to make sure that data flows from the OPC UA server. 
+. Choose *Save* at the bottom. No changes are necessary. This action activates the AWS IoT SiteWise gateway to make sure that data flows from the OPC UA server. 
 . If it hasn't already been done, navigate to Ignition, and look for and accept the quarantined certificate.
 
-* If using KepServer for Windows, make sure that your default firewalls have been turned off. They prevent the SiteWise Gateway certificates from showing up.
+* If using KepServer for Windows, make sure that your default firewalls have been turned off. They prevent the AWS IoT SiteWise gateway certificates from showing up.
 
 
 
@@ -151,20 +151,20 @@ Ensure that you're attempting to make the connection from the same network you d
 . Scroll to the right and choose the security group associated with the EC2 instance.
 . Edit the inbound rules for the rule associated with port 8088 to match the IP address you're attempting the connection from. 
 
-*Narrowing Ignition or Greengrass permissions (for workload template deployments only)*
+*Narrowing Ignition or AWS IoT Greengrass permissions (for workload template deployments only)*
 
 . Open the EC2 console.
 . Take note of the private IP addresses of the following:
-.. The Greengrass EC2 instance for the current deployment
+.. The AWS IoT Greengrass EC2 instance for the current deployment
 .. The Ignition EC2 instance for the current deployment
 . Highlight one of the two EC2 instances that has been created for your deployment.
 . Scroll to the right and choose the security group associated with the EC2 instance.
 . Edit the rule associated with port 8883 and replace *0.0.0.0/0* with the private IP address for the Ignition EC2 instance.
-. Edit the rule associated with port 62541 and replace *0.0.0.0/0* with the private IP address for the Greengrass EC2 instance.
+. Edit the rule associated with port 62541 and replace *0.0.0.0/0* with the private IP address for the AWS IoT Greengrass EC2 instance.
 
-*Models and assets weren't created in SiteWise*
+*Models and assets weren't created in AWS IoT SiteWise*
 
-If models and assets were not created in SiteWise and the Cirrus Link AMC Driver was used, follow these steps to troubleshoot. Post-deployment Cirrus Link Module Configuration
+If models and assets were not created in AWS IoT SiteWise and the Cirrus Link AMC driver was used, follow these steps to troubleshoot. Post-deployment Cirrus Link module configuration
 
 //TODO Marcia to determine whether that phrase is supposed to be there.
 
@@ -193,7 +193,7 @@ Verify that tagPathConfiguration is not being filtered out:
 [link=images/Ignition-MQTT-Filtered-Properties.png]
 image::../images/Ignition-MQTT-Filtered-Properties.png[Ignition MQTT filtered properties]
 
-If these settings are as shown in <<ignition-mqtt-filtered>> and you're still receiving errors, check the Lambda function responsible for creating the models and assets in SiteWise for errors:
+If these settings are as shown in <<ignition-mqtt-filtered>> and you're still receiving errors, check the Lambda function responsible for creating the models and assets in AWS IoT SiteWise for errors:
 . Open the AWS Lambda console, and navigate to the function named `<name_of_stack>-AssetModelIngestionLambdaResource-<hash>` (replacing the information in brackets).
 . Choose the *Monitoring* tab.
 . Choose *View logs in CloudWatch*.

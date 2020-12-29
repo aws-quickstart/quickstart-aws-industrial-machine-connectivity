@@ -6,10 +6,10 @@
 |VPCs |1
 |Security groups |1
 |AWS Identity and Access Management (IAM) roles |12
-|DynamoDb tables |2
+|DynamoDB tables |2
 |Lambda functions |10
 |AWS IoT topic rules |6
-|AWS Kinesis Firehose streams |2
+|Kinesis Data Firehose streams |2
 |S3 buckets |4
 |EC2 instances |2
 |===
