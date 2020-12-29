@@ -4,4 +4,4 @@
 
 This guide provides instructions for deploying the {partner-product-name} ({partner-product-short-name}) Quick Start reference architecture on the AWS Cloud.
 
-This Quick Start is for developers and AWS Partners, regional and global systems integrators, independent software vendors, and original equipment manufacturers who want to derive business value from an Industrial Internet of Things (IIoT) architecture. The Quick Start helps you bring data from your industrial assets to the AWS Cloud in a structured way.
+The Quick Start helps you bring data from your industrial assets to the AWS Cloud in a structured way. It's for developers and AWS Partners, regional and global systems integrators, independent software vendors, and original equipment manufacturers who want to derive business value from an Industrial Internet of Things (IIoT) architecture.
