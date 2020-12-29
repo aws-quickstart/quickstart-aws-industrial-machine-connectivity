@@ -7,14 +7,14 @@ When the AWS CloudFormation stack is completed, follow these steps to configure 
 
 . <<Edge devices (physical deployments only)>>
 . <<Deploy edge software (physical deployments only)>>
-. <<Initiate the Asset Model Converter (AMC)>>
-. <<Enable the SiteWise connector>>
+. <<Initiate the Asset Model Converter>>
+. <<Enable the AWS IoT SiteWise connector>>
 . <<Validate incoming data>>
 
 //TODO Marcia to align these links: capitalization, start with verbs, etc. (First one's not a step.)
 
 ==== Edge devices (physical deployments only)
-The physical brownfield deployment is intended to demonstrate the capabilities of the {partner-product-short-name} Quick Start in an environment where the end user has an existing edge-based asset modeling software (such as Ignition or KepServer). It is deployed onto physical hardware. After deployment, the physical hardware runs Greengrass software and connect into the edge-based asset modeling software. The {partner-product-short-name} Quick Start supports the following OEM devices: 
+The physical brownfield deployment is intended to demonstrate the capabilities of the {partner-product-short-name} Quick Start in an environment where the end user has an existing edge-based asset modeling software (such as Ignition or KepServer). It is deployed onto physical hardware. After deployment, the physical hardware runs AWS IoT Greengrass software and connect into the edge-based asset modeling software. The {partner-product-short-name} Quick Start supports the following OEM devices: 
 
 * Lenovo
 ** Model: ThinkCentre M90n IoT
@@ -39,13 +39,13 @@ The physical brownfield deployment is intended to demonstrate the capabilities o
 
 
 ==== Edge software deployment (physical deployments only)
-This step is only necessary if deploying one of the physical deployment options (Greenfield or Brownfield).
+This step is only necessary if deploying one of the physical deployment options (greenfield or brownfield).
 
 Configure the AWS CLI to point to the AWS account you're using for the {partner-product-short-name} Quick Start.
 
-The Physical-Brownfield deployment mode does not come with a configured set of project tags similar to the virtual deployment but does come with a set of device simulations that can be configured to represent a project tag structure similar to the virtual deployment tag structure (or your own structure entirely). This deployment can be configured to work with a physical PLC test harness. 
+The physical-brownfield deployment mode does not come with a configured set of project tags similar to the virtual deployment but does come with a set of device simulations that can be configured to represent a project tag structure similar to the virtual deployment tag structure (or your own structure entirely). This deployment can be configured to work with a physical PLC test harness. 
 
-The Physical-Greenfield deployment mode is compatible with either Inductive Automation's Ignition Server (https://inductiveautomation.com/ignition/) or PTCs KEPServerEX (https://www.kepware.com/en-us/products/kepserverex/). This deployment option does not bootstrap any partner edge software. The only edge software application that is bootstrapped on the physical hardware as part of the deployment is AWS IoT Greengrass.
+The physical-greenfield deployment mode is compatible with either Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] or PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^]. This deployment option does not bootstrap any partner edge software. The only edge software application that is bootstrapped on the physical hardware as part of the deployment is AWS IoT Greengrass.
 
 ===== Retrieve the {partner-product-short-name} edge device bootup script
 . Retrieve and run the bootup script for the physical hardware device
@@ -134,7 +134,7 @@ image::../images/BootupCommand.png[Bootup command]
  
  ./physical-greenfield-option1.sh imc-snow-devicesbucketresource-4wjvs58vbhwj SnowCone/SnowConeCore.tar.gz 6tppoqlka4 us-east-1 SnowCone <Hardware-IP> SnowCone/SnowConeDevice.tar.gz <IoT Core ATS Endpoint>
 
-==== Create a tag hierarchy in Ignition (physical Greenfield only)
+==== Create a tag hierarchy in Ignition (physical-greenfield only)
 Represent your data in Ignition by creating a project tag hierarchy. The source of this data can be physical PLCs or simulated devices in Ignition. 
 
 . Download the Ignition Designer software.
@@ -143,12 +143,12 @@ Represent your data in Ignition by creating a project tag hierarchy. The source 
  `http://<hardwarePrivateIP>:8088`
 
 . In the top right corner, choose *Get Designer*.
-. Install the Ignition Designer for your operating system.
-. Open the Ignition Designer and connect to your Ignition server.
+. Install Ignition Designer for your operating system.
+. Open Ignition Designer and connect to your Ignition server.
 . Launch the Designer.
 .. Choose *Add Designer*. 
 .. Choose *Manually Add Gateway*.
-.. Add a Gateway URL in the following format, replacing the information in brackets: 
+.. Add a gateway URL in the following format, replacing the information in brackets: 
 
  `http://<reachableIgnitionIP>:8088`
 
@@ -161,17 +161,17 @@ Represent your data in Ignition by creating a project tag hierarchy. The source 
 
 ==== Initiate a Sparkplug node birth message in Ignition
 
-. When you are logged in to the Ignition Designer, navigate to the tag browser, open *Tag providers*, and choose *MQTT Transmission*, *Transmission Control*. 
+. When you are logged in to Ignition Designer, navigate to the tag browser, open *Tag providers*, and choose *MQTT Transmission*, *Transmission Control*. 
 . Choose the *Refresh* button. A birth message is initiated.
 
 .Refresh Sparkplug birth certificates
 [link=images/RefreshBirthCertificates.png]
 image::../images/RefreshBirthCertificates.png[Refresh birth certificates]
 
-This action initiates the {partner-product-short-name} Quick Start's Asset Model Converter (AMC), which creates the models and assets that represent the Ignition hierarchy in SiteWise. 
+This action initiates the {partner-product-short-name} Quick Start's Asset Model Converter (AMC), which creates the models and assets that represent the Ignition hierarchy in AWS IoT SiteWise. 
 
 ==== Accept the OPC UA client certificate
-To enable SiteWise to ingest data over OPC UA from Ignition's OPC UA server, accept the certificate presented by the SiteWise connector within Ignition as follows:
+To enable AWS IoT SiteWise to ingest data over OPC UA from Ignition's OPC UA server, accept the certificate presented by the AWS IoT SiteWise connector within Ignition as follows:
 
 . Get the private IP address of the physical hardware. 
 . In any browser, load this URL, replacing <*hardwarePrivateIP*>: `http://<hardwarePrivateIP>:8088`
@@ -180,28 +180,28 @@ To enable SiteWise to ingest data over OPC UA from Ignition's OPC UA server, acc
 .. User name: admin
 .. Password: password
 .. If you haven't already, change your password after you've logged into the Ignition web UI.
-. Choose *OPC UA*, *Security*, *Server*. Wait for the quarantined certificate to appear (from AWS IoT SiteWise Gateway). You should see a single entry under *Quarantined Certificates* named something like *AWS IoT SiteWise Gateway Client*.
-. Choose *Trust* to accept the certificate. The SiteWise connector starts consuming data over OPC UA from Ignition. This data is sent to AWS IoT SiteWise in the cloud.
+. Choose *OPC UA*, *Security*, *Server*. Wait for the quarantined certificate to appear (from AWS IoT SiteWise gateway). You should see a single entry under *Quarantined Certificates* named something like *AWS IoT SiteWise gateway client*.
+. Choose *Trust* to accept the certificate. The AWS IoT SiteWise connector starts consuming data over OPC UA from Ignition. This data is sent to AWS IoT SiteWise in the cloud.
 
-==== Initiate the Asset Model Converter (AMC)
+==== Initiate the Asset Model Converter
 Choose the Asset Model Converter (AMC) driver you configured in the AWS CloudFormation stack configuration (stack parameter label: `AMCDriver`) to follow the appropriate post-deployment steps:
 
 * <<AMCDriver - IgnitionCirrusLink>>
 * <<AMCDriver - IgnitionFileExport>>
 
 ===== AMCDriver - IgnitionCirrusLink
-This AMCDriver option runs automatically with the launch of the {partner-product-short-name} Quick Start (virtual option). Proceed to the next section: <<SiteWise Connector Activation>>.
+This AMCDriver option runs automatically with the launch of the {partner-product-short-name} Quick Start (virtual option). Proceed to the next section: <<AWS IoT SiteWise connector activation>>.
 
 ===== AMCDriver - IgnitionFileExport
-This section walks through exporting the JSON file from Ignition Server that describes your project's tag hierarchy and uploading it to an S3 bucket (created during AWS CloudFormation stack formation) to initiate the AMC workflow.
+This section walks through exporting the JSON file from Ignition, describing your project's tag hierarchy, and uploading it to an S3 bucket (created during AWS CloudFormation stack formation) to initiate the AMC workflow.
 
-. Access the Ignition Server web App
-.. Open the Ignition Server UI by choosing the URL available in the output of the AWS CloudFormation stack. This is the format of the URL, where <IgnitionServerPublicIP> is filled in:
+. Access the Ignition web app
+.. Open the Ignition UI by choosing the URL available in the output of the AWS CloudFormation stack. This is the format of the URL, where <IgnitionServerPublicIP> is filled in:
 ... `http://<IgnitionServerPublicIP>:8088`
-.. The IgnitionServerPublicIP address is the same as the public IP address of the EC2 instance on which Ignition Server is running. The name of the EC2 instance should end with `/Ignition`. 
+.. The IgnitionServerPublicIP address is the same as the public IP address of the EC2 instance on which Ignition is running. The name of the EC2 instance should end with `/Ignition`. 
 .. Reminder: The security group of this EC2 instance is opening up the 8088 port to IP addresses in a specific CIDR block based on the `public IP address` parameter you entered during the AWS CloudFormation stack launch.
 
-. Get the Ignition Designer Launcher software.
+. Get the Ignition Designer launcher software.
 .. With the Ignition web UI open, choose *Sign in* in the top-right corner, and sign in with the default credentials:
 .. User name: admin
 .. Password: password
@@ -210,14 +210,14 @@ This section walks through exporting the JSON file from Ignition Server that des
 .. Follow the instructions to install the Ignition Designer software application for your local machine's operating system.
 
 . Add Ignition gateway.
-.. Open the Ignition Designer Launcher application.
+.. Open the Ignition Designer launcher application.
 .. Choose *Add Designer*. 
 .. Choose *Manually Add Gateway*.
-.. Add a Gateway URL in the following format, replacing *<ignition_ec2_public_ip>*: 
+.. Add a gateway URL in the following format, replacing the information in brackets: 
 ... `http://<ignition_ec2_public_ip>:8088`
 
 . Export tag definition JSON file.
-.. Open the Ignition Designer Launcher app.
+.. Open the Ignition Designer launcher app.
 .. Under the gateway tile you just added, choose *Launch*. 
 .. Supply the user name and password (defined previously), and choose *Login*.
 .. In the tag browser, under *Tag Providers*, choose *default*, and choose *Export*. Save this tag definition JSON file in a local location that you can access.
@@ -226,45 +226,48 @@ This section walks through exporting the JSON file from Ignition Server that des
 [link=images/IgnitionExportTags.png]
 image::../images/IgnitionExportTags.png[Ignition export tags]
 
-. Initiate the Asset Model Converter (AMC)
-.. Upload the JSON file you just downloaded into the S3 bucket created during deployment to initiate the AMC and creation of models and assets in SiteWise. The S3 bucket is named according to this convention (replacing the information in brackets):
+. Initiate the AMC.
+.. Upload the JSON file you just downloaded into the S3 bucket created during deployment to initiate the AMC and creation of models and assets in . The S3 bucket is named according to this convention (replacing the information in brackets):
+
+//TODO Shivansh, What was intended to go between "in" and the perioed above?
+
 ... <name_of_stack>-<amcincomingresource>-<hash>
 .. Upon uploading the JSON file into this S3 bucket, an S3 event trigger automatically invokes the AMC Lambda function to begin the automated AMC workflow.
 .. After approximately a minute, models and assets are provisioned within AWS IoT SiteWise. Large, complex tag hierarchy definitions may take more than five minutes.
 
-The AMC workflow is now complete. Proceed to the next section: <<SiteWise Connector Activation>>
+The AMC workflow is now complete. Proceed to the next section: <<Enable the AWS IoT SiteWise connector>>.
 
 
-==== Enable the SiteWise connector
-To enable the SiteWise connector running in AWS IoT Greengrass to ingest data over OPC UA from Ignition's OPC UA server, accept the certificate presented by the SiteWise connector within Ignition.
+==== Enable the AWS IoT SiteWise connector
+To enable the AWS IoT SiteWise connector running in AWS IoT Greengrass to ingest data over OPC UA from Ignition's OPC UA server, accept the certificate presented by the AWS IoT SiteWise connector within Ignition.
 
-. Accept SiteWise Certificate in Ignition
-.. Open the Ignition Server UI using the URL available in the output of the AWS CloudFormation stack. This is the format of the URL (replacing the information in brackets): 
+. Accept AWS IoT SiteWise certificate in Ignition.
+.. Open the Ignition UI using the URL available in the output of the AWS CloudFormation stack. This is the format of the URL (replacing the information in brackets): 
 ... http://<IginitionServer-EC2-Instance-PublicIP>:8088
-... The IgnitionServerPublicIP address is the same as the public IP address of the EC2 instance on which Ignition Server is running. The name of the EC2 instance should end with '/Ignition'
+... The IgnitionServerPublicIP address is the same as the public IP address of the EC2 instance on which Ignition is running. The name of the EC2 instance should end with '/Ignition'
 ... Reminder: The security group of this EC2 instance is opening up the 8088 port to IP addresses in a specific CIDR block based on the public IP address parameter you entered during the AWS CloudFormation stack launch.
 .. With the Ignition web UI open, choose *Sign in* in the top-right corner, and log in with the default credentials:
 ... User name: admin
 ... Password: password
 .... If you haven't already, update the user name and password from the default values immediately after login.
-.. On the left side of the Ignition web app UI, choose *OPC UA*, *Security*, *Server*. The certificate from the SiteWise connector in Greengrass appears in the *Quarantined Certificates* section. The certificate has the name similar to *AWS IoT SiteWise Gateway Client*.
-.. Choose *Trust* to accept the certificate. The SiteWise connector starts consuming data over OPC UA from Ignition. This data is sent up to the AWS IoT SiteWise service in the AWS Cloud.
+.. On the left side of the Ignition web app UI, choose *OPC UA*, *Security*, *Server*. The certificate from the AWS IoT SiteWise connector in AWS IoT Greengrass appears in the *Quarantined Certificates* section. The certificate has the name similar to *AWS IoT SiteWise Gateway Client*.
+.. Choose *Trust* to accept the certificate. The AWS IoT SiteWise connector starts consuming data over OPC UA from Ignition. This data is sent up to the AWS IoT SiteWise service in the AWS Cloud.
 
-. Update the SiteWise gateway.
+. Update the AWS IoT SiteWise gateway.
 .. Open the AWS IoT SiteWise console. In the left-hand menu, choose *Ingest*, *Gateways*.
 .. Choose the gateway created during the stack launch. The gateway name uses the following naming convention, where *<name_of_stack>* is replaced with the stack name: 
 ... `<name_of_stack>_Automated_Gateway`
-.. In the *Source Configuration for Automated Gateway Config* section, choose *Edit*.
-.. Choose *Save* at the bottom. You do not need to make any changes. Editing and saving the configuration refreshes the SiteWise gateway and makes sure that data flows from the OPC UA server through the SiteWise gateway connector into the AWS IoT SiteWise service in the AWS Cloud.
+.. In the *Source configuration for automated gateway config* section, choose *Edit*.
+.. Choose *Save* at the bottom. You do not need to make any changes. Editing and saving the configuration refreshes the AWS IoT SiteWise gateway and makes sure that data flows from the OPC UA server through the AWS IoT SiteWise gateway connector into the AWS IoT SiteWise service in the AWS Cloud.
 
 ==== Validate incoming data 
 
 ===== Dataflow option 1
 When using dataflow option 1, verify that data is flowing into AWS IoT SiteWise.
-. Now that you've trusted the SiteWise gateway connector certificate, return to the AWS IoT SiteWise console.
-. Open the SiteWise console. Choose the menu icon on the left-hand side of the page, and choose *Build*, *Assets*.
+. Now that you've trusted the AWS IoT SiteWise gateway connector certificate, return to the AWS IoT SiteWise console.
+. Open the AWS IoT SiteWise console. Choose the menu icon on the left-hand side of the page, and choose *Build*, *Assets*.
 . In the asset tree on the left, drill down to an asset (such as Hauloff or Conveyor), choose it, and then choose the *Measurements* tab for that asset.
-. Verify that the values in the *Latest value* column are updating. This indicates that the Ignition simulation of those virtual devices and sensors is properly sending data through to the SiteWise connector (from OPC UA) in Greengrass and up to AWS IoT SiteWise in the AWS Cloud.
+. Verify that the values in the *Latest value* column are updating. This indicates that the Ignition simulation of those virtual devices and sensors is properly sending data through to the AWS IoT SiteWise connector (from OPC UA) in AWS IoT Greengrass and up to AWS IoT SiteWise in the AWS Cloud.
 
 ===== Dataflow option 2a or 2b
 When using dataflow option 2a or 2b, validate the dataflow as follows:
@@ -279,19 +282,19 @@ Validate that data is flowing into AWS IoT Core:
 
 . Verify that messages are coming in on this topic.
 
-Validate that data is flowing into S3:
+Validate that data is flowing into Amazon S3:
 
-. Open the S3 console.
+. Open the Amazon S3 console.
 . Search for the bucket `<stack_name>-imcs3bucket-<hash>, replacing <stack_name> and <hash>.
-. Click into the bucket and confirm that an S3 prefix inside the bucket named `mqtt` exists. 
+. Click into the bucket and confirm that an S3 prefix exists inside the bucket named `mqtt`. 
 
 
-==== View the SiteWise portal data 
+==== View the AWS IoT SiteWise portal data 
 
-Enable SSO in the Region you launched in the AWS CloudFormation stack in, and make sure that you have a user created in that Region to access the SiteWise Monitor dashboards.
+Enable SSO in the Region you launched in the AWS CloudFormation stack in, and make sure that you have a user created in that Region to access the AWS IoT SiteWise Monitor dashboards.
 
-. Log in to SiteWise Monitor portal.
-.. Open the SiteWise console, choose the menu icon on the left, and choose *Monitor*, *Portals*. 
+. Log in to AWS IoT SiteWise Monitor portal.
+.. Open the AWS IoT SiteWise console, choose the menu icon on the left, and choose *Monitor*, *Portals*. 
 .. Choose the hyperlinked name of the portal most recently added (the topmost on the list). 
 .. Under *Portal Administrators*, choose *Assign Users*, and add yourself as an administrator. 
 .. Under *Portal details* in the *URL* column, choose the hyperlinked URL. This URL should have the following format, where <XXXXX....XXXXXX> is filled in: 
@@ -300,7 +303,7 @@ Enable SSO in the Region you launched in the AWS CloudFormation stack in, and ma
 
 .. Log in with the credentials (user name and password) that you just created for your administrator account.
 
-. View data in the SiteWise Monitor portal
+. View data in the AWS IoT SiteWise Monitor portal
 .. Choose the *Dashboards* tab on the left-hand side.
 .. In the *Name* column, choose the newly created dashboard hyperlink, and verify that data is flowing into the line charts for the asset measurement properties.
 .. Choose the *Asset Library* tab on the left, and choose an asset from the asset tree. View its properties, and verify the data.
@@ -316,18 +319,18 @@ Solution:
 
 //TODO Marcia What to swap in here for "solution"?
 
-First, verify that the Ignition trial period (2 hours) has not expired. If that action does not remediate the issue, repeat the process of refreshing the SiteWise Gateway:
+First, verify that the Ignition trial period (2 hours) has not expired. If that action does not remediate the issue, repeat the process of refreshing the AWS IoT SiteWise gateway:
 
 . Open the AWS IoT SiteWise console. Choose *Ingest*, *Gateways*. 
 . Choose the gateway created during the stack launch:
 .. Naming convention: `<name_of_stack>_Automated_Gateway`
-. Choose *Edit* in the Source Configuration for Automated Gateway Config section
-. Choose *Save* at the bottom. No changes are necessary. This action activates the SiteWise gateway to make sure that data flows from the OPC UA server. 
+. Choose *Edit* in the *Source Configuration for Automated Gateway Config* section.
+. Choose *Save* at the bottom. No changes are necessary. This action activates the AWS IoT SiteWise gateway to make sure that data flows from the OPC UA server. 
 . If it hasn't already been done, open Ignition, and look for and accept the quarantined certificate.
 
 
-===== Issue 2: Models and assets weren't created in SiteWise
-Check the Lambda function responsible for creating the models and assets in SiteWise for errors:
+===== Issue 2: Models and assets weren't created in AWS IoT SiteWise
+Check the Lambda function responsible for creating the models and assets in AWS IoT SiteWise for errors:
 
 . In the AWS Lambda console, navigate to the function named <name_of_stack>-AssetModelIngestionLambdaResource-<hash> (replacing the information in brackets).
 
@@ -335,9 +338,9 @@ Check the Lambda function responsible for creating the models and assets in Site
 . Choose *View logs in CloudWatch*.
 . Click into the most recent log stream, and find the error message.
 
-===== Issue 3: Models and assets weren't created in SiteWise
+===== Issue 3: Models and assets weren't created in AWS IoT SiteWise
 
-Check the Lambda function responsible for creating the models and assets in SiteWise for errors:
+Check the Lambda function responsible for creating the models and assets in AWS IoT SiteWise for errors:
 
 . In the AWS Lambda console, navigate to the function named `<name_of_stack>-AssetModelIngestionLambdaResource-<hash>` (replacing the information in brackets).
 
@@ -374,9 +377,9 @@ Follow these steps to clean up the Quick Start AWS CloudFormation stack deployme
 
 //TODO Marcia to come back and clean up capitalization in subheads.
 
-. Open the AWS CloudFormation console, and delete the base stack (not the stack named *NESTED*) to clean up the account as much as possible. Most of the resources are deleted, but the stack deletion fails due to nonempty S3 buckets and potentially a deployed Greengrass group (for all virtual options by default, and for all physical deployments that have been completed on a piece of hardware). The following steps are required to delete a stack:
+. Open the AWS CloudFormation console, and delete the base stack (not the stack named *NESTED*) to clean up the account as much as possible. Most of the resources are deleted, but the stack deletion fails due to nonempty S3 buckets and potentially a deployed AWS IoT Greengrass group (for all virtual options by default, and for all physical deployments that have been completed on a piece of hardware). The following steps are required to delete a stack:
 .. Empty the S3 buckets:
-.. Sign in to the AWS Console, and open the S3 service.
+.. Sign in to the AWS Console, and open the Amazon S3 service.
 .. In the search bar, enter your stack name.
 .. For each bucket that is associated with the stack, choose the bucket, and choose *Empty* under the search bar. This is the bucket-naming convention, (replacing the bracketed elements): 
 
@@ -388,14 +391,14 @@ Follow these steps to clean up the Quick Start AWS CloudFormation stack deployme
 ... devicesbucketresource
 ... imcs3bucket
 ... lambdazipsbucket
-. Force a reset of the GreenGrass group:
-.. Open the GreenGrass console.
-.. Choose the GreenGrass group with the *Name for the Edge device* parameter name provided to the stack.
+. Force a reset of the AWS IoT Greengrass group:
+.. Open the AWS IoT Greengrass console.
+.. Choose the AWS IoT Greengrass group with the *Name for the Edge device* parameter name provided to the stack.
 .. Under *Actions*, choose *Reset Deployments*.
 .. Select the check box indicating that you want to force the reset.
 .. Choose *Reset Deployment*.
 . Navigate back to the AWS CloudFormation console, and again delete the base stack—the main stack (the one that does not have *NESTED* in a gray box associated with it).
-. (Optional) Clean up other resources, such as SiteWise Portal, SiteWise Gateway, SiteWise Models and Assets, and QuickSight dataset.
+. (Optional) Clean up other resources, such as AWS IoT SiteWise portal, gateway, models, and assets as well as the QuickSight dataset.
 
 ==== Clean up edge hardware
 
@@ -408,7 +411,7 @@ Follow these steps to clean up the Quick Start AWS CloudFormation stack deployme
  rm device.tar.gz group.tar.gz opcclient.der Ignition-AWS-Kit-MQTT-v4.zip physical-greenfield-option<insert_option_here>.sh
  rm -rf Ignition-AWS-Kit-MQTT-v4 
 
-. Stop and remove GreenGrass:
+. Stop and remove AWS IoT Greengrass:
 
  apt remove aws-iot-greengrass-core 
  rm -rf /greengrass

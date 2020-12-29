@@ -2,8 +2,8 @@
 :partner-product-name: Industrial Machine Connectivity
 :partner-product-short-name: IMC
 //:partner-company-name:
-:doc-month: December
-:doc-year: 2020
+:doc-month: January
+:doc-year: 2021
 //:partner-contributors:
 :quickstart-contributors: Thomas Cummins and Shivansh Singh, AWS Quick Start team
 :deployment_time: 10 minutes
