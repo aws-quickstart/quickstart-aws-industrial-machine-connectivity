@@ -166,11 +166,9 @@ Ensure that you're attempting to make the connection from the same network you d
 
 If models and assets were not created in AWS IoT SiteWise and the Cirrus Link AMC driver was used, follow these steps to troubleshoot. Post-deployment Cirrus Link module configuration
 
-//TODO Marcia to determine whether that phrase is supposed to be there.
-
 . Open the Ignition console, and navigate to MQTT transmission settings.
 
-.Ignition - Settings
+.Ignition—Settings
 [link=images/IgnitionSettings.png]
 image::../images/IgnitionSettings.png[Ignition settings]
 
@@ -179,7 +177,7 @@ image::../images/IgnitionSettings.png[Ignition settings]
 . Under *Data Format Type*, choose *Sparkplug_B_v1_0_JSON*. 
 . Choose *Save Changes*.
 
-.Ignition - MQTT transmission module settings
+.Ignition—MQTT transmission module settings
 [link=images/Ignition-MQTT-Settings.png]
 image::../images/Ignition-MQTT-Settings.png[Ignition MQTT settings]
 
@@ -189,7 +187,7 @@ Verify that tagPathConfiguration is not being filtered out:
 . Verify that tagPathConfiguration is not being filtered out. 
 
 [#ignition-mqtt-filtered]
-.Ignition - MQTT transmission module filtered properties
+.Ignition—MQTT transmission module filtered properties
 [link=images/Ignition-MQTT-Filtered-Properties.png]
 image::../images/Ignition-MQTT-Filtered-Properties.png[Ignition MQTT filtered properties]
 

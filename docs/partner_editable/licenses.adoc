@@ -5,5 +5,5 @@ No licenses are required to deploy this Quick Start. All AWS service resources c
 Some configurations of the {partner-product-short-name} Quick Start involve the use of third-party software. You are responsible for obtaining a license directly from the software vendor. Products that integrate with the {partner-product-short-name} Quick Start are available from the following software vendors:
 
 * Inductive Automation (vendor for Ignition)
-** Cirrus Link (vendor for the MQTT transmission module for the Ignition software stack)
+* Cirrus Link (vendor for the MQTT transmission module for the Ignition software stack)
 * PTC (vendor for KEPServerEX)

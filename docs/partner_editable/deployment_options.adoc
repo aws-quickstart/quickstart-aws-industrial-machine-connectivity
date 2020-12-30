@@ -2,7 +2,9 @@
 
 This Quick Start provides two deployment options:
 
-* *Deploy {partner-product-name} into a new VPC*. This option builds a new AWS environment consisting of the VPC, subnets, security groups, and other infrastructure components. It then deploys {partner-product-name} into this new VPC.
+* *Deploy {partner-product-name} into a new VPC*. This option builds a new AWS environment consisting of the VPC, subnet, security group, and other infrastructure components. It then deploys {partner-product-name} into this new VPC.
 * *Deploy {partner-product-name} into an existing VPC*. This option provisions {partner-product-name} in the default VPC of your existing AWS infrastructure.
 
 The Quick Start provides separate templates for these options.
+
+//TODO Shivansh, These two options are both for virtual deployment. How do we update this to include physical deployment? (And how many permalinks will we need here, for which templates?)

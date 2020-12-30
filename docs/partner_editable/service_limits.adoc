@@ -3,8 +3,8 @@
 |Resource |This deployment uses
 
 // Space needed to maintain table headers
-|VPCs |1
-|Security groups |1
+|VPC |1
+|Security group |1
 |AWS Identity and Access Management (IAM) roles |12
 |DynamoDB tables |2
 |Lambda functions |10
