@@ -20,7 +20,8 @@ The configuration steps you follow after deploying this Quick Start depend on wh
 * Link to physical greenfield deployment guide
 * Link to physical brownfield deployment guide
 
-//TODO Shivansh, Where should these links (above) point? 
+//TODO Shivansh, Where should these links (above) point?
+
 //TODO Shivansh, What are the titles of the three guides exactly as they appear in those guides?
 
 //== Best practices for using the {partner-product-short-name} Quick Start on AWS
@@ -44,6 +45,7 @@ The configuration steps you follow after deploying this Quick Start depend on wh
 * Extending or modifying the {partner-product-short-name} Quick Start with new features and capabilities (link to external document)
 
 //TODO Shivansh, What are these links (above)? 
+
 //TODO Shivansh, What are the titles of the four docs exactly as they appear in those docs?
 
 === Asset Model Converter
@@ -145,7 +147,6 @@ assetModelEntry = {
         }
     }
 ....
-//TODO Shivansh, This service name—AWS IoT SiteWise—"must always include 'AWS' in any content platform." Please make sure that this name is cited fully throughout the code, including comments. Then update any lines we quote in the docs, such as those above. (As needed, change "a" to "an" too.)
 
 Asset table name:
 
@@ -185,7 +186,7 @@ assetEntry = {
 .. Tag 1: Temperature
 .. To the left of the *Properties* section, choose the *Add Tag* button, and choose *OPC Tag*: 
 
-.Ignition Designer - Add tag
+.Ignition Designer—Add tag
 [link=images/IgnitionAddTag.png]
 image::../images/IgnitionAddTag.png[Ignition add tag]
 
@@ -200,7 +201,7 @@ Next, edit the basic properties of the tag:
 . Choose *Apply* and *OK* to accept the tag configuration.
 
 [#ignition-tag-config]
-.Ignition Designer - Configure tag
+.Ignition Designer—Configure tag
 [link=images/IgnitionTagConfiguration.png]
 image::../images/IgnitionTagConfiguration.png[Configure tag]
 
@@ -227,7 +228,7 @@ Create a third tag to represent vibration.
 When you're finished adding all your tags, the pump should look as shown in <<pulp-tag-structure>>:
 
 [#pulp-tag-structure]
-.Ignition Designer - Pump tag structure
+.Ignition Designer—Pump tag structure
 [link=images/PumpTagStructure.png]
 image::../images/PumpTagStructure.png[Pump tag structure]
 
@@ -248,37 +249,37 @@ After the {partner-product-short-name} Quick Start deployment succeeds (models a
 . Allow QuickSight access to the S3 bucket that houses the data from the {partner-product-short-name} Quick Start. 
 .. Choose *Manage QuickSight* from the top-right corner.
 
-.QuickSight - Manage QuickSight
+.QuickSight—Manage QuickSight
 [link=images/QSManageQS.png]
 image::../images/QSManageQS.png[Manage QuickSight]
 
 Choose *Security & permissions*. Under *QuickSight access to AWS services*, choose *Add or remove*.
 
-.QuickSight - Security and permissions
+.QuickSight—Security and permissions
 [link=images/QSSecurityAndPermissions.png]
 image::../images/QSSecurityAndPermissions.png[Security and permissions]
 
 Under *QuickSight access to AWS services*, select *Amazon S3*.
 
-.QuickSight - Access to AWS services
+.QuickSight—Access to AWS services
 [link=images/QSAccessToServices.png]
 image::../images/QSAccessToServices.png[Access to AWS services]
 
-Find the S3 bucket labeled `[IMCQSDeploymentName]...-imcs3bucket-….`, select it, and choose *Finish*.
+Find the S3 bucket labeled `<IMCQSDeploymentName>...-imcs3bucket-….`, select it, and choose *Finish*.
 
-.QuickSight - Select the S3 bucket
+.QuickSight—Select the S3 bucket
 [link=images/QSSelectS3Bucket.png]
 image::../images/QSSelectS3Bucket.png[Select S3 bucket]
 
 Open the IoT console. Choose *Test* on the navigation bar. The MQTT client opens.
 
-.AWS IoT Core - Test client
+.AWS IoT Core—Test client
 [link=images/QS-MQTT-Client.png]
 image::../images/QS-MQTT-Client.png[Test client]
 
 Initiate the creation of your QuickSight dataset by publishing an MQTT message to the MQTT topic: `imc/control/quicksight`. Enter anything; the content of your message is inconsequential.
 
-.AWS IoT Core - MQTT publish message
+.AWS IoT Core—MQTT publish message
 [link=images/QS-MQTT-Publish.png]
 image::../images/QS-MQTT-Publish.png[MQTT publish message]
 
@@ -315,4 +316,4 @@ LICENSE.txt
     	NOTICE.txt
     	README.md
 ....
-//TODO Shivansh, Table 7 and Table 10 describe the same parameters. We don't want that duplication, do we?
+//TODO Shivansh, In the generated guide, Table 7 and Table 10 repeat the same parameters ("AWS Quick Start Configuration"). How do we eliminate that duplication?

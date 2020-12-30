@@ -1,17 +1,13 @@
 // This doc is for the "Post-deployment steps" section
 // Current URL: https://aws-quickstart.github.io/quickstart-aws-industrial-machine-connectivity/#_post_deployment_steps
 
-
-=== Post-deployment steps
 When the AWS CloudFormation stack is completed, follow these steps to configure the {partner-product-short-name} Quick Start to make it operational.
 
 . <<Edge devices (physical deployments only)>>
-. <<Deploy edge software (physical deployments only)>>
+. <<Edge software deployment (physical deployments only)>>
 . <<Initiate the Asset Model Converter>>
 . <<Enable the AWS IoT SiteWise connector>>
 . <<Validate incoming data>>
-
-//TODO Marcia to align these links: capitalization, start with verbs, etc. (First one's not a step.)
 
 ==== Edge devices (physical deployments only)
 The physical brownfield deployment is intended to demonstrate the capabilities of the {partner-product-short-name} Quick Start in an environment where the end user has an existing edge-based asset modeling software (such as Ignition or KepServer). It is deployed onto physical hardware. After deployment, the physical hardware runs AWS IoT Greengrass software and connect into the edge-based asset modeling software. The {partner-product-short-name} Quick Start supports the following OEM devices: 
@@ -49,9 +45,6 @@ The physical-greenfield deployment mode is compatible with either Inductive Auto
 
 ===== Retrieve the {partner-product-short-name} edge device bootup script
 . Retrieve and run the bootup script for the physical hardware device
-
-//TODO Marcia to bump numbers back a notch and change "step 1s" like this to body (throughout).
-
 .. Open a terminal on the physical hardware
 .. Use the command line to become the root user in your terminal session: 
  
@@ -77,13 +70,13 @@ To get the values of <DependenciesBucket> and <BootupScript>, open the AWS Cloud
 |<BootupScript> 
 | Find the key corresponding to your configuration, and select its value. *(See the following blue text for reference.)*
 
+//TODO Shivansh, will "green" and "blue" make sense to everyone?
+
 * <<pre-reqs.adoc#BootupScriptGreenfieldOption1,BootupScriptGreenfieldOption1>>
 * <<pre-reqs.adoc#BootupScriptGreenfieldOption2a,BootupScriptGreenfieldOption2a>>
 * <<pre-reqs.adoc#BootupScriptGreenfieldOption2b,BootupScriptGreenfieldOption2b>>
 * <<pre-reqs.adoc#BootupScriptBrownfieldAllOptions,BootupScriptBrownfieldAllOptions>>	 
 
-//TODO Marcia, what do these four items above look like in the generated doc? And other similar references later in this file?
-//TODO Marcia, will "green" and "blue" make sense to everyone?
 |===
 
 .<DependenciesBucket> and <BootupScript>
@@ -109,7 +102,7 @@ image::../images/DependenciesBucket.png[Dependencies bucket]
 | FullScriptParamsGreenfield1and2a
 | Copy the command from the AWS CloudFormation *Value* column.
 
-* This option is for: deployment type = <<pre-reqs.adoc#Physical-Greenfield,Physical-Greenfield>>, dataflow option = <<pre-reqs.adoc#Option 1 (OPC-UA to SiteWise),Option 1 (OPC-UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>>
+* This option is for: deployment type = <<pre-reqs.adoc#Physical-Greenfield,Physical-Greenfield>>, dataflow option = <<pre-reqs.adoc#Option 1 (OPC UA to SiteWise),Option 1 (OPC UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>>
 
 | FullScriptParamsGreenfield2b
 | Copy the command from the AWS CloudFormation *Value* column
@@ -119,9 +112,8 @@ image::../images/DependenciesBucket.png[Dependencies bucket]
 | FullScriptParamsBrownField
 | Copy the command from the AWS CloudFormation *Value* column
 
-* This option is for: deployment type = <<pre-reqs.adoc#Physical-Brownfield,Physical-Brownfield>>, dataflow option = <<pre-reqs.adoc#Option 1 (OPC-UA to SiteWise),Option 1 (OPC-UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>> or <<pre-reqs.adoc#Option 2b (MQTT to Greengrass to IoT Core),Option 2b (MQTT to Greengrass to IoT Core)>> 
+* This option is for: deployment type = <<pre-reqs.adoc#Physical-Brownfield,Physical-Brownfield>>, dataflow option = <<pre-reqs.adoc#Option 1 (OPC UA to SiteWise),Option 1 (OPC UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>> or <<pre-reqs.adoc#Option 2b (MQTT to Greengrass to IoT Core),Option 2b (MQTT to Greengrass to IoT Core)>> 
 
-//TODO Marcia to check what's in the double brackets here.
 |===
 
 .Physical deployment bootup scripts
@@ -186,18 +178,19 @@ To enable AWS IoT SiteWise to ingest data over OPC UA from Ignition's OPC UA ser
 ==== Initiate the Asset Model Converter
 Choose the Asset Model Converter (AMC) driver you configured in the AWS CloudFormation stack configuration (stack parameter label: `AMCDriver`) to follow the appropriate post-deployment steps:
 
-* <<AMCDriver - IgnitionCirrusLink>>
-* <<AMCDriver - IgnitionFileExport>>
+* <<AMCDriver—IgnitionCirrusLink>>
+* <<AMCDriver—IgnitionFileExport>>
 
-===== AMCDriver - IgnitionCirrusLink
+===== AMCDriver—IgnitionCirrusLink
 This AMCDriver option runs automatically with the launch of the {partner-product-short-name} Quick Start (virtual option). Proceed to the next section: <<AWS IoT SiteWise connector activation>>.
 
-===== AMCDriver - IgnitionFileExport
+//TODO Shivansh, What section is that link above supposed to point to?
+
+===== AMCDriver—IgnitionFileExport
 This section walks through exporting the JSON file from Ignition, describing your project's tag hierarchy, and uploading it to an S3 bucket (created during AWS CloudFormation stack formation) to initiate the AMC workflow.
 
 . Access the Ignition web app
-.. Open the Ignition UI by choosing the URL available in the output of the AWS CloudFormation stack. This is the format of the URL, where <IgnitionServerPublicIP> is filled in:
-... `http://<IgnitionServerPublicIP>:8088`
+.. Open the Ignition UI by choosing the URL available in the output of the AWS CloudFormation stack. This is the format of the URL, where <IgnitionServerPublicIP> is filled in: `http://<IgnitionServerPublicIP>:8088`.
 .. The IgnitionServerPublicIP address is the same as the public IP address of the EC2 instance on which Ignition is running. The name of the EC2 instance should end with `/Ignition`. 
 .. Reminder: The security group of this EC2 instance is opening up the 8088 port to IP addresses in a specific CIDR block based on the `public IP address` parameter you entered during the AWS CloudFormation stack launch.
 
@@ -229,7 +222,7 @@ image::../images/IgnitionExportTags.png[Ignition export tags]
 . Initiate the AMC.
 .. Upload the JSON file you just downloaded into the S3 bucket created during deployment to initiate the AMC and creation of models and assets in . The S3 bucket is named according to this convention (replacing the information in brackets):
 
-//TODO Shivansh, What was intended to go between "in" and the perioed above?
+//TODO Shivansh, What was intended to go between "in" and the period above?
 
 ... <name_of_stack>-<amcincomingresource>-<hash>
 .. Upon uploading the JSON file into this S3 bucket, an S3 event trigger automatically invokes the AMC Lambda function to begin the automated AMC workflow.
@@ -309,15 +302,11 @@ Enable SSO in the Region you launched in the AWS CloudFormation stack in, and ma
 .. Choose the *Asset Library* tab on the left, and choose an asset from the asset tree. View its properties, and verify the data.
 
 ==== Troubleshooting
-//TODO Marcia to consolidate this section with the troubleshooting section in faq_troubleshooting.adoc.
+//TODO Shivansh, Please consolidate this "Troubleshooting" section with the standard "Troubleshooting" section in faq_troubleshooting.adoc.
 
 ===== Issue 1: Quarantined certificate in Ignition (or Kepware) doesn't show up, or data doesn't show up for Option 1 deployments
 
-//TODO Marcia to verify what "Option 1" refers to (and look for other refs, incl. "Option 2")
-
 Solution: 
-
-//TODO Marcia What to swap in here for "solution"?
 
 First, verify that the Ignition trial period (2 hours) has not expired. If that action does not remediate the issue, repeat the process of refreshing the AWS IoT SiteWise gateway:
 
@@ -374,8 +363,6 @@ Check the Lambda function responsible for creating the models and assets in AWS 
 Follow these steps to clean up the Quick Start AWS CloudFormation stack deployment:
 
 ==== Cloud asset cleanup
-
-//TODO Marcia to come back and clean up capitalization in subheads.
 
 . Open the AWS CloudFormation console, and delete the base stack (not the stack named *NESTED*) to clean up the account as much as possible. Most of the resources are deleted, but the stack deletion fails due to nonempty S3 buckets and potentially a deployed AWS IoT Greengrass group (for all virtual options by default, and for all physical deployments that have been completed on a piece of hardware). The following steps are required to delete a stack:
 .. Empty the S3 buckets:

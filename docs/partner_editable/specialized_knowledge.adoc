@@ -2,7 +2,3 @@
 // Describe or link to specific knowledge requirements; for example: "familiarity with basic concepts in the areas of networking, database operations, and data encryption" or "familiarity with <software>."
 
 This Quick Start also assumes familiarity with AWS IoT Core, AWS IoT SiteWise, AWS IoT Greengrass, and edge applications, such as Inductive Automation's Ignition and PTC's KEPServerEX.
-
-//TODO Marcia to check these names & make sure the boilerplate above this paragraph generates as expected.
-
-

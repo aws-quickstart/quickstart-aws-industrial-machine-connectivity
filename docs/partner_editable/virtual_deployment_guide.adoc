@@ -1,4 +1,6 @@
-//This document is the ASCII DOC version of the "IMC - Virtual Deployment User Guide" word document found in the IMC Quick Start Github repo (URL: https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx)
+//This document is the ASCII DOC version of the "IMC—Virtual Deployment User Guide" word document found in the IMC Quick Start Github repo (URL: https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx)
+
+//TODO Shivansh, How does this doc fit into our set of files? It's not part of the generated deployment guide.
 
 === Virtual deployment guide
 
@@ -8,13 +10,13 @@ The virtual deployment is intended for demonstration, training, and evaluation o
 ==== Deployment options
 The options for virtual deployment depend on two configuration choices:
 
-. Dataflow option - There are three options for dataflow:
+. Dataflow option—There are three options for dataflow:
 - Option 1
 - Option 2a
 - Option 2b
 . Ignition tag hierarchy source
 - Cirrus Link MQTT module: This option is based on the Cirrus Link MQTT transmission module implementing the SparkplugB MQTT spec to publish birth certificates when a node or device is created within the Ignition Designer UI dashboard. The AMC runs automatically without a manual step with this option and results in assets provisioned within AWS IoT SiteWise.
-- Ignition File Export - This option is based on exporting a JSON tag hierarchy definition file from Ignition Server and uploading it into an S3 bucket. After the file is uploaded to the S3 bucket, the AMC runs automatically, resulting in assets provisioned within AWS IoT SiteWise.
+- Ignition File Export—This option is based on exporting a JSON tag hierarchy definition file from Ignition Server and uploading it into an S3 bucket. After the file is uploaded to the S3 bucket, the AMC runs automatically, resulting in assets provisioned within AWS IoT SiteWise.
 
 Depending on the choices of these two configuration options, there are a total of six deployment modes:
 
@@ -28,7 +30,7 @@ Depending on the choices of these two configuration options, there are a total o
 ==== Getting started
 
 . Make sure that you have completed the prerequisites detailed in the link:pre-reqs.adoc[Prepare for Deployment] section.
-//TODO Marcia: verify this link above and others like it throughout.
+//TODO Marcia: verify this link above. Are there others like it?
 . Make sure that you are launching the AWS CloudFormation stack in one of the supported Regions for the {partner-product-short-name} Quick Start. For the choices, see link:#_supported_regions[Supported Regions] earlier in this guide.
 
 . Choose one of the six deployment modes from the *Deployment Modes* list earlier, and follow these sections:
@@ -38,9 +40,9 @@ Depending on the choices of these two configuration options, there are a total o
 ==== References:
 Refer to the following sections as needed:
 
-- Troubleshooting - Refer to this section to troubleshoot {partner-product-short-name} stack launch and operation.
-- Virtual Cleanup - Refer to this section to cleanup AWS resources launched for the {partner-product-short-name} Quick Start.
-- Virtual Deployment FAQ - Refer to this section for FAQs regarding {partner-product-short-name} Quick Start.
+- Troubleshooting—Refer to this section to troubleshoot {partner-product-short-name} stack launch and operation.
+- Virtual Cleanup—Refer to this section to cleanup AWS resources launched for the {partner-product-short-name} Quick Start.
+- Virtual Deployment FAQ—Refer to this section for FAQs regarding {partner-product-short-name} Quick Start.
 
 ==== Launch the AWS CloudFormation stack
 To launch the virtual deployment of the {partner-product-short-name} Quick Start, sign in to the AWS Console, and open the AWS CloudFormation console. Create a new stack, and choose *with new resources (standard)*. 
