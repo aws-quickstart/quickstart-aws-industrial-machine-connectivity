@@ -1,8 +1,10 @@
 //This document is the ASCII DOC version of the "IMC—Virtual Deployment User Guide" word document found in the IMC Quick Start Github repo (URL: https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx)
 
-//TODO Shivansh, How does this "IMC-Virtual Deployment User Guide" fit into our set of files? It's not part of the generated deployment guide, but it's in the partner-editable fileset. Confusing.
+//TODO Shivansh, Why do we have this Asciidoc version in our set of files in the partner-editable folder? Are we replacing the Word docs?
 
-//TODO Shivansh, Note that the URL above has "master" in it. That needs to change when we update the language in GitHub.
+//TODO Shivansh, If we need an Asciidoc version for this user guide, then also for the other two Word user guides?
+
+//TODO Shivansh, Note that the URL above has "master" in it. That needs to change when we update the GitHub "master" reference.
 
 === Virtual deployment guide
 
@@ -55,7 +57,7 @@ To launch the virtual deployment of the {partner-product-short-name} Quick Start
 ** Choose *Template is ready*.
 * Choose one of the following templates:
 ** Template source: Leave as default – *Amazon S3 URL*. Most users want to use `IMC-main.template.yaml`, the main template that's in the AWS Quick Start S3 bucket. 
-//TODO Shivansh, I changed "master" to "main" in the filename above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note.
+//TODO Shivansh, I changed "master" to "main" in the filename above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note. (This content isn't in the generated deployment guide. Does this need to get edited a Word doc??)
 *** Main template S3 URL: https://aws-quickstart.s3.amazonaws.com/quickstart-aws-industrial-machine-connectivity/templates/IMC-main.template.yaml
 //TODO Shivansh, I changed "master" to "main" in the URL above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note.
 *** This template launches the Quick Start in a new VPC. Only five VPCs per account are permitted. 

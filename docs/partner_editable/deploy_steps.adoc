@@ -4,7 +4,7 @@
 //Physical_Greenfield_Deployment.adoc
 //Physical-Brownfield.adoc
 
-//TODO Shivansh, Are these three comments above action items for someone?
+//TODO Shivansh, Are these three comments above action items for someone? Or has that content already been folded in?
 
 // We need to work around Step numbers here if we are going to potentially exclude the AMI subscription
 === Sign in to your AWS account
@@ -45,6 +45,8 @@ Each deployment takes about {deployment_time} to complete.
 ^|http://qs_launch_permalink[Deploy {partner-product-name} into an existing VPC on AWS^]
 ^|http://qs_template_permalink[View template^]
 |===
+
+//TODO Marcia to add permalinks throughout.
 
 [start=2]
 . Check the AWS Region that's displayed in the upper-right corner of the navigation bar, and change it if necessary. This Region is where the network infrastructure for {partner-product-name} is built. The template is launched in the {default_deployment_region} Region by default. For other choices, see link:#_supported_regions[Supported Regions] earlier in this guide. 
