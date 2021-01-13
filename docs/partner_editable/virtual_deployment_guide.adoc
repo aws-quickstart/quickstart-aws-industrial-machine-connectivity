@@ -1,6 +1,8 @@
 //This document is the ASCII DOC version of the "IMC—Virtual Deployment User Guide" word document found in the IMC Quick Start Github repo (URL: https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx)
 
-//TODO Shivansh, How does this doc fit into our set of files? It's not part of the generated deployment guide.
+//TODO Shivansh, How does this "IMC-Virtual Deployment User Guide" fit into our set of files? It's not part of the generated deployment guide, but it's in the partner-editable fileset. Confusing.
+
+//TODO Shivansh, Note that the URL above has "master" in it. That needs to change when we update the language in GitHub.
 
 === Virtual deployment guide
 
@@ -30,7 +32,7 @@ Depending on the choices of these two configuration options, there are a total o
 ==== Getting started
 
 . Make sure that you have completed the prerequisites detailed in the link:pre-reqs.adoc[Prepare for Deployment] section.
-//TODO Marcia: verify this link above. Are there others like it?
+//TODO Shivansh, is this doc part of what's going into our deployment guide? If so please verify this link above and any others like it.
 . Make sure that you are launching the AWS CloudFormation stack in one of the supported Regions for the {partner-product-short-name} Quick Start. For the choices, see link:#_supported_regions[Supported Regions] earlier in this guide.
 
 . Choose one of the six deployment modes from the *Deployment Modes* list earlier, and follow these sections:
@@ -52,8 +54,10 @@ To launch the virtual deployment of the {partner-product-short-name} Quick Start
 * Prerequisites:
 ** Choose *Template is ready*.
 * Choose one of the following templates:
-** Template source: Leave as default – *Amazon S3 URL*. Most users want to use the `IMC-master.template.yaml` main template that's in the AWS Quick Start S3 bucket. 
-*** Main template S3 URL: https://aws-quickstart.s3.amazonaws.com/quickstart-aws-industrial-machine-connectivity/templates/IMC-master.template.yaml
+** Template source: Leave as default – *Amazon S3 URL*. Most users want to use `IMC-main.template.yaml`, the main template that's in the AWS Quick Start S3 bucket. 
+//TODO Shivansh, I changed "master" to "main" in the filename above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note.
+*** Main template S3 URL: https://aws-quickstart.s3.amazonaws.com/quickstart-aws-industrial-machine-connectivity/templates/IMC-main.template.yaml
+//TODO Shivansh, I changed "master" to "main" in the URL above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note.
 *** This template launches the Quick Start in a new VPC. Only five VPCs per account are permitted. 
 ** Alternatively, launch the `IMC-workload.template.yaml` AWS Cloudformation template. The workload template launches the Quick Start in your default VPC. 
 *** Workload template S3 URL: https://aws-quickstart.s3.amazonaws.com/quickstart-aws-industrial-machine-connectivity/templates/IMC-workload.template.yaml
@@ -84,7 +88,7 @@ o	Amazon EC2 configuration
 	Choose the Asset Model Converter (AMC) driver: Leave as default (`IgnitionCirrusLink`). 
 	User public IP address: Input your public IP address in the format `x.x.x.x` so the EC2 instance security groups allow access from your IP address.
 
-//TODO Marcia: Is this Step 2 duplicating what's in our parameter tables?
+//TODO Shivansh: Is this Step 2 duplicating what's in our parameter tables?
 
 .TABLE DESCRIPTION
 |===

@@ -17,7 +17,7 @@ image::../images/imc_framework.png[IMC Quick Start overview]
 
 //TODO Shivansh, Please supply the source file that Figure 1 was generated from.
 
-//TODO Marcia to update this diagram to avoid "IMC framework". Per Shivansh, say "IMC QS" instead (but keep "ACM framework"). Capitalize "Cloud" when it follows "AWS," "near-real-time," "plant floor" > "factory floor," "historian" lowercase, label purple icon "Amazon QuickSight," eliminate the key in lower-right corner.)
+//TODO When Marcia has this source file, will update this diagram to avoid saying "IMC framework". Per Shivansh, say "IMC QS" instead (but keep "ACM framework"). Other edits I'll make: Capitalize "Cloud" when it follows "AWS"; "near-real-time"; "plant floor" > "factory floor"; "historian" lowercase; label purple icon "Amazon QuickSight"; no key in lower-right corner.
 
 The {partner-product-short-name} Quick Start helps connect industrial assets to AWS Cloud services along with visualizing data using AWS IoT SiteWise Monitor and Amazon QuickSight dashboards. The IoT partner edge software applications handle the industrial protocol translation from the programmable logic controllers (PLCs), other devices, historians, and supervisory control and data acquisition (SCADA) systems they connect to. The {partner-product-short-name} architecture integrates both the data collected by the edge software applications and the asset model hierarchy that they maintain. 
 

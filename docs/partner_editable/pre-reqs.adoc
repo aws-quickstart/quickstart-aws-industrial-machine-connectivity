@@ -23,13 +23,37 @@ When you deploy the {partner-product-short-name} Quick Start, you choose between
 ** *Greenfield.* In a greenfield physical deployment, you build from scratch for a new environment. AWS IoT Greengrass and the partner edge software run on a single edge device (an industrial PC) with Ignition installed alongside AWS IoT Greengrass on the same PC.
 ** *Brownfield.* In a brownfield physical deployment, you build within an existing environment. AWS IoT Greengrass runs standalone on an industrial PC and connects to the partner edge software application that is already running on the customer's premises, such as on a virtual machine in the server room of a factory. Assume that your access to the hardware is limited or nonexistent and that your ability to reconfigure the edge software application server is limited to additive changes only.
 
+=== Review edge devices (physical deployments only)
+The physical brownfield deployment is intended to demonstrate the capabilities of the {partner-product-short-name} Quick Start in an environment where the end user has an existing edge-based asset modeling software (such as Ignition or KepServer). It is deployed onto physical hardware. After deployment, the physical hardware runs AWS IoT Greengrass software and connects into the edge-based asset modeling software. The {partner-product-short-name} Quick Start supports the following OEM devices: 
+
+* Lenovo
+** Model: ThinkCentre M90n IoT
+** Architecture: Intel® Celeron® 4205U (x86)
+** URL: https://www.lenovo.com/us/en/desktops-and-all-in-ones/thinkcentre/m-series-tiny/ThinkCentre-M90n-IoT/p/thinkcentre-m90n-iot
+* ADLINK 
+** Model: MXE-211
+** Architecture: Intel Atom® Processor E3900 (x86) 
+** URL: https://www.adlinktech.com/Products/Industrial_IoT_and_Cloud_solutions/IoTGateway/MXE-210_Series?lang=en
+* OnLogic
+** Model: Karbon 300 Compact Rugged Computer
+** Architecture: Intel Atom® E3930 or E3950 processors
+** URL: https://onlogic.com/k300/ 
+* Advantech 
+** Model: UNO-2372G
+** Architecture: Intel Atom E3845/Celeron® J1900 Quad-Core Processors
+** URL: https://www.advantech.com/products/1-2mlj9a/uno-2372g/mod_f4ff5680-f016-44bd-bff0-e5eddfd82237
+* MOXA
+** Model: MC-1112-E4-T
+** Architecture: Intel Atom® Processor E3845 processor
+** URL: https://www.moxa.com/en/products/industrial-computing/x86-computers/mc-1100-series/mc-1121-e4-t
+
 === Review the dataflow options
 
-When you deploy the {partner-product-short-name} Quick Start, you choose between three dataflow options. Each option ingests data differently from the edge environment into the AWS Cloud. 
+When you deploy the {partner-product-short-name} Quick Start, you choose between three dataflow options. Each option ingests data differently from the edge environment into the AWS Cloud. For illustrations of these dataflows in the virtual and physical deployments, see (<<architecture-virtual>>) and (<<architecture-physical>>). 
 
-* *Option 1 (OPC UA to AWS IoT SiteWise).* With this option, you configure the AWS IoT Greengrass SiteWise connector to connect to the edge software application OPC UA server. All telemetry data flows directly into AWS IoT SiteWise.
-* *Option 2a (MQTT to AWS IoT Core).* With this option, the edge software application server connects to AWS IoT Core from MQTT. All telemetry data is pushed from the edge software application server to AWS IoT Core. From there, the data is pushed to Amazon S3 or a similar data lake for processing. Data is not forwarded to AWS IoT SiteWise. Custom development is required to populate data in AWS IoT SiteWise.
-* *Option 2b (MQTT to AWS IoT Greengrass to AWS IoT Core).* This option is identical to 2a except that the edge software application server pushes MQTT data messages to AWS IoT Greengrass core first. Then those messages are forwarded to AWS IoT Core. Data is not forwarded to AWS IoT SiteWise. Custom development is required to populate data in AWS IoT SiteWise.
+* *Dataflow option 1 (OPC UA to AWS IoT SiteWise).* With this option, you configure the AWS IoT Greengrass SiteWise connector to connect to the edge software application OPC UA server. All telemetry data flows directly into AWS IoT SiteWise.
+* *Dataflow option 2a (MQTT to AWS IoT Core).* With this option, the edge software application server connects to AWS IoT Core from MQTT. All telemetry data is pushed from the edge software application server to AWS IoT Core. From there, the data is pushed to Amazon S3 or a similar data lake for processing. Data is not forwarded to AWS IoT SiteWise. Custom development is required to populate data in AWS IoT SiteWise.
+* *Dataflow option 2b (MQTT to AWS IoT Greengrass to AWS IoT Core).* This option is identical to 2a except that the edge software application server pushes MQTT data messages to AWS IoT Greengrass core first. Then those messages are forwarded to AWS IoT Core. Data is not forwarded to AWS IoT SiteWise. Custom development is required to populate data in AWS IoT SiteWise.
 
 For physical deployments, you will use one of the following bootup scripts during the post-deployment steps to configure both the deployment type and the dataflow option.
  

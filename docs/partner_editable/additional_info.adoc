@@ -39,6 +39,8 @@ The configuration steps you follow after deploying this Quick Start depend on wh
 
 //_Add any other details that will help the customer use the software on AWS._
 
+=== External documents
+
 * Guide for creating AMC drivers (link to external document)
 * AMC approved DyanamoDB table format (link to external document)
 * Adding a line and device to an Ignition project (link to external document)
@@ -52,38 +54,29 @@ The configuration steps you follow after deploying this Quick Start depend on wh
 
 The Asset Model Converter (AMC) code is in two separate Lambda functions located in the functions or source directory of the repository.
 
-* AssetModelIngestion
-** This is the ingestion Lambda function. Its purpose is to listen to MQTT messages coming from the CirusLink Ignition module and put them into the incoming S3 bucket as objects. The relevant handler file is `assetModelIngestion.py`. 
-
-* AssetModelConverter
-** The AMC covers two functions: AMC1 and AMC2. 
-*** AMC1 
-**** This code is initiated by an Amazon S3 object creation from the incoming bucket. It has its reserved concurrent executions set to 1 to make sure that only a single instance of Lambda can ever fire at the same time. This has been done because the Ignition Cirrus Link module can birth the asset structure as multiple discrete MQTT messages, each of which becomes a file object in Amazon S3.
-**** The core logic of the AMC1 comes in the form of the main handler file, `assetModelConverter.py`. It contains the base Lambda handler function, which in turn calls into the AssetModelConverter class to execute the handling of a given S3 object-creation event. This code in turn calls the relevant driver code to handle the asset structure files.
-**** AMC drivers 
-***** AMC drivers in AMC1 are responsible for parsing the incoming asset structure files and converting them into a normalized format that is then stored into DynamoDB. See the "Creating AMC Drivers" section of the Getting Started guide for more details on creating drivers and the DynamoDB normalized format.
-*** AMC2
-**** This relevant code file here is `createSitewiseResources.py`. This contains code to take the normalized DynamoDB format, and create relevant AWS IoT Sitewise assets and models from that format. Changes are marked in the DynamoDB table to various assets or models that require updates or creation.
-**** Additionally, all AWS IoT Sitewise interactions take place in the `sitewiseUtils.py` code.
-
-NOTE: Only additive changes are supported.
-
-**** The AMC2 process:
-
-. Model creation
-.. The DynamoDB models table is queried to look for models that require creation. Those are created in AWS IoT Sitewise.
-. Asset creation
-.. The DynamoDB assets table is also queried, looking for records that are marked as needing creation. Those assets, instances of the models created during 'Model Creation' are then created in AWS IoT Sitewise.
-. Model hierarchies
-.. In this step models are associated with each other in a hierarchy that are tagged as having such a parent-child relationship.
-. Asset associations
-.. Similarly in this final step, assets that are tagged as having a parent-child relationship are associated with each.
+* AssetModelIngestion. This is the ingestion Lambda function. Its purpose is to listen to MQTT messages coming from the CirusLink Ignition module and put them into the incoming S3 bucket as objects. The relevant handler file is `assetModelIngestion.py`. 
+* AssetModelConverter. The AMC covers two functions: AMC1 and AMC2. 
+** AMC1 
+*** This code is initiated by an Amazon S3 object creation from the incoming bucket. It has its reserved concurrent executions set to 1 to make sure that only a single instance of Lambda can ever fire at the same time. This has been done because the Ignition Cirrus Link module can birth the asset structure as multiple discrete MQTT messages, each of which becomes a file object in Amazon S3.
+*** The core logic of the AMC1 comes in the form of the main handler file, `assetModelConverter.py`. It contains the base Lambda handler function, which in turn calls into the AssetModelConverter class to execute the handling of a given S3 object-creation event. This code in turn calls the relevant driver code to handle the asset structure files.
+*** AMC drivers in AMC1 are responsible for parsing the incoming asset structure files and converting them into a normalized format that is then stored into DynamoDB. See the "Creating AMC Drivers" section of the Getting Started guide for more details on creating drivers and the DynamoDB normalized format.
+** AMC2
+*** This relevant code file here is `createSitewiseResources.py`. This contains code to take the normalized DynamoDB format, and create relevant AWS IoT Sitewise assets and models from that format. Changes are marked in the DynamoDB table to various assets or models that require updates or creation.
+*** All AWS IoT Sitewise interactions take place in the `sitewiseUtils.py` code. 
+*** Only additive changes are supported.
+*** The AMC2 process:
+. Model creation. The DynamoDB models table is queried to look for models that require creation. Those are created in AWS IoT Sitewise.
+. Asset creation. The DynamoDB assets table is also queried, looking for records that are marked as needing creation. Those assets, instances of the models created during 'Model Creation' are then created in AWS IoT Sitewise.
+. Model hierarchies. In this step models are associated with each other in a hierarchy that are tagged as having such a parent-child relationship.
+. Asset associations. Similarly in this final step, assets that are tagged as having a parent-child relationship are associated with each.
 
 === Creating AMC drivers
 
 . Write the driver that interprets the incoming hierarchy data from your edge-based asset modeling software and converts it into the AMC-approved format (see the format here) and puts it into DynamoDB.
 
-//TODO Shivansh, In the previous sentence, what does "here" refer to?
+//TODO Shivansh, In the previous sentence, what does "format here" refer to ... a downloadable file? ... a web page?
+
+//TODO Shivansh, What's the URL for that link?
 
 .. Refer to the template file for guidance while writing your driver:
 ... `/functions/source/AssetModelConverter/drivers/example_driver_template.py`
@@ -106,9 +99,7 @@ NOTE: Only additive changes are supported.
 .... `<name_of_driver>`
 
 
-=== Appendix
-
-==== Artifacts
+=== Artifacts
 
 The following directories and files are necessary for running an {partner-product-short-name} Quick Start deployment: 
 
@@ -124,7 +115,7 @@ The following directories and files are necessary for running an {partner-produc
 * *scripts/*: Contains the scripts that are run on physical hardware if running a physical deployment.
 * *templates/*: Contains the various AWS CloudFormation templates that are deployed depending on the deployment options selected during stack creation.
 
-==== AMC-approved DynamoDB format
+=== AMC-approved DynamoDB format
 
 Asset mModel table name:
  
@@ -167,7 +158,7 @@ assetEntry = {
 ....
 
 
-==== Add a line and device to an Ignition project
+=== Add a line and device to an Ignition project
 
 . Navigate to Ignition Designer and connect to your Ignition server.
 .. Launch Ignition Designer.
@@ -242,7 +233,7 @@ Add the line to the project:
 
 This initiates an MQTT message that defines your new hierarchy, with Line 4 and the pump included. Your new models and assets now appear in AWS IoT SiteWise.
 
-==== Set up a QuickSight dashboard along with the {partner-product-short-name} Quick Start deployment
+=== Set up a QuickSight dashboard along with the {partner-product-short-name} Quick Start deployment
 
 After the {partner-product-short-name} Quick Start deployment succeeds (models and assets have finished creation in AWS IoT SiteWise), the following manual steps are required to create a QuickSight dataset. 
 
@@ -291,7 +282,7 @@ image::../images/QS-Datasets.png[QuickSight datasets]
 
 Now that you've created a dataset in QuickSight, you can create visualizations with the data. For details, see https://docs.aws.amazon.com/quicksight/latest/user/welcome.html[What Is Amazon QuickSight?^].
 
-==== Launch the AWS CloudFormation stack from your own S3 bucket
+=== Launch the AWS CloudFormation stack from your own S3 bucket
 
 This section tells how to extend or modify the {partner-product-short-name} Quick Start with new features or capabilities. Here's the high-level process: clone the https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity[{partner-product-short-name} Quick Start repo^], create a new S3 bucket, and add the repo assets to that bucket. The following instructions detail the process:
 
