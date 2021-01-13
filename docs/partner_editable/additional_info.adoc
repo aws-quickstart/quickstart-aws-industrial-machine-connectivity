@@ -14,15 +14,15 @@
 //Reference post-deployment.adoc file
 include::./post_deployment.adoc[]
 
-The configuration steps you follow after deploying this Quick Start depend on which deployment option you chose. Follow the steps documented in the appropriate guide:
+The configuration steps you follow after deploying this Quick Start depend on which deployment option you chose. Follow the steps documented in the appropriate user guide. Download here:
 
-* Link to virtual deployment guide
-* Link to physical greenfield deployment guide
-* Link to physical brownfield deployment guide
+* https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/raw/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx[IMC Virtual Deployment User Guide]
+* https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/raw/master/documentation/IMC%20-%20Physical-Greenfield%20Deployment%20User%20Guide.docx[IMC Physical-Greenfield Deployment User Guide]
+* https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/raw/master/documentation/IMC%20-%20Physical-Brownfield%20Deployment%20User%20Guide.docx[Physical-Brownfield Deployment User Guide]
 
-//TODO Shivansh, Where should these links (above) point?
+//TODO Shivansh, Do people still need these user guides? From a quick scan of the Word docs, it looks like they cover a lot of info similar to this deployment guide. Maybe those guides become obsolete now? (If we're keeping these guides, please clarify the relationship between them and this deployment guide.)
 
-//TODO Shivansh, What are the titles of the three guides exactly as they appear in those guides?
+//TODO Shivansh, Note that the URLs above have "master" in them. That needs to change when we update the GitHub "master" reference.
 
 //== Best practices for using the {partner-product-short-name} Quick Start on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
@@ -46,7 +46,7 @@ The configuration steps you follow after deploying this Quick Start depend on wh
 * Adding a line and device to an Ignition project (link to external document)
 * Extending or modifying the {partner-product-short-name} Quick Start with new features and capabilities (link to external document)
 
-//TODO Shivansh, What are these links (above)? 
+//TODO Shivansh, What are the URLs for the links above? 
 
 //TODO Shivansh, What are the titles of the four docs exactly as they appear in those docs?
 
@@ -60,6 +60,7 @@ The Asset Model Converter (AMC) code is in two separate Lambda functions located
 *** This code is initiated by an Amazon S3 object creation from the incoming bucket. It has its reserved concurrent executions set to 1 to make sure that only a single instance of Lambda can ever fire at the same time. This has been done because the Ignition Cirrus Link module can birth the asset structure as multiple discrete MQTT messages, each of which becomes a file object in Amazon S3.
 *** The core logic of the AMC1 comes in the form of the main handler file, `assetModelConverter.py`. It contains the base Lambda handler function, which in turn calls into the AssetModelConverter class to execute the handling of a given S3 object-creation event. This code in turn calls the relevant driver code to handle the asset structure files.
 *** AMC drivers in AMC1 are responsible for parsing the incoming asset structure files and converting them into a normalized format that is then stored into DynamoDB. See the "Creating AMC Drivers" section of the Getting Started guide for more details on creating drivers and the DynamoDB normalized format.
+//TODO Shivansh, What is this Getting Started guide (above)? How do people find it?
 ** AMC2
 *** This relevant code file here is `createSitewiseResources.py`. This contains code to take the normalized DynamoDB format, and create relevant AWS IoT Sitewise assets and models from that format. Changes are marked in the DynamoDB table to various assets or models that require updates or creation.
 *** All AWS IoT Sitewise interactions take place in the `sitewiseUtils.py` code. 
@@ -76,7 +77,7 @@ The Asset Model Converter (AMC) code is in two separate Lambda functions located
 
 //TODO Shivansh, In the previous sentence, what does "format here" refer to ... a downloadable file? ... a web page?
 
-//TODO Shivansh, What's the URL for that link?
+//TODO Shivansh, What's the URL for that "format here" link?
 
 .. Refer to the template file for guidance while writing your driver:
 ... `/functions/source/AssetModelConverter/drivers/example_driver_template.py`
@@ -307,4 +308,3 @@ LICENSE.txt
     	NOTICE.txt
     	README.md
 ....
-//TODO Shivansh, In the generated guide, Table 7 and Table 10 repeat the same parameters ("AWS Quick Start Configuration"). How do we eliminate that duplication?

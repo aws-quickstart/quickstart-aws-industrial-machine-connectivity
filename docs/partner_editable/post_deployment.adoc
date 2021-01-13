@@ -159,8 +159,6 @@ Choose the Asset Model Converter (AMC) driver you configured in the AWS CloudFor
 ==== AMCDriver—IgnitionCirrusLink
 This AMCDriver option runs automatically with the launch of the {partner-product-short-name} Quick Start virtual option. Proceed to the next section: <<Enable the AWS IoT SiteWise connector>>.
 
-//TODO Shivansh, What section is that link above supposed to point to?
-
 ==== AMCDriver—IgnitionFileExport
 This section walks through exporting the JSON file from Ignition, describing your project's tag hierarchy, and uploading it to an S3 bucket (created during AWS CloudFormation stack formation) to initiate the AMC workflow.
 
