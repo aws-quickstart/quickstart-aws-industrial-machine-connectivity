@@ -69,6 +69,7 @@ Depending on the AMC driver you used, take the follow actions to rerun the AMC:
 *AMC driver: IgnitionCirrusLink*
 
 Initiate a rebirth (NBIRTH,DBIRTH) MQTT message that represents the your project hierarchy.
+
 . Connect to your Ignition server in Ignition Designer.
 . Launch Ignition Designer, open the tag browser, and choose *Tag providers*, *MQTT Transmission*, *Transmission Control*. 
 . Choose the *Refresh* button. A birth message is initiated.
@@ -172,6 +173,7 @@ If models and assets were not created in AWS IoT SiteWise and the Cirrus Link AM
 [link=images/IgnitionSettings.png]
 image::../images/IgnitionSettings.png[Ignition settings]
 
+[start=2]
 . Choose *Servers*, *Settings*, *Edit*. 
 . At the bottom of the screen, select the *Show advanced properties* check box.
 . Under *Data Format Type*, choose *Sparkplug_B_v1_0_JSON*. 
@@ -181,10 +183,11 @@ image::../images/IgnitionSettings.png[Ignition settings]
 [link=images/Ignition-MQTT-Settings.png]
 image::../images/Ignition-MQTT-Settings.png[Ignition MQTT settings]
 
-Verify that tagPathConfiguration is not being filtered out:
-. In the MQTT transmission module settings, choose *Transmitters*, *Edit*. 
-. At the bottom of the screen, select the *Show advanced properties* check box. 
-. Verify that tagPathConfiguration is not being filtered out. 
+[start=6]
+. Verify that `tagPathConfiguration` is not being filtered out:
+.. In the MQTT transmission module settings, choose *Transmitters*, *Edit*. 
+.. At the bottom of the screen, select the *Show advanced properties* check box. 
+.. Verify that `tagPathConfiguration` is not being filtered out. 
 
 [#ignition-mqtt-filtered]
 .Ignition—MQTT transmission module filtered properties
@@ -192,7 +195,13 @@ Verify that tagPathConfiguration is not being filtered out:
 image::../images/Ignition-MQTT-Filtered-Properties.png[Ignition MQTT filtered properties]
 
 If these settings are as shown in <<ignition-mqtt-filtered>> and you're still receiving errors, check the Lambda function responsible for creating the models and assets in AWS IoT SiteWise for errors:
-. Open the AWS Lambda console, and navigate to the function named `<name_of_stack>-AssetModelIngestionLambdaResource-<hash>` (replacing the information in brackets).
+
+. Open the AWS Lambda console, and navigate to the function with this name (replacing the information in brackets):
+    `<name_of_stack>-AssetModelIngestionLambdaResource-<hash>`
 . Choose the *Monitoring* tab.
 . Choose *View logs in CloudWatch*.
 . Click into the most recent log stream, and find the error message to troubleshoot.
+
+//TODO Shivansh, In the parameter tables following this section, for the main template under QSS3KeyPrefix, we say AllowedPattern: ^([0-9a-zA-Z-.]+/)*$. Are these parentheses above supposed to be here? We don't include parens for this parameter in IMC-workload.template.yaml or in this Quip: https://quip-amazon.com/lIOaA1eoAGDz/SigV4-Quick-Start-Changes.
+
+//TODO Shivansh, In the parameter tables, for both templates under EdgeDeviceID, we give the label as "Name for the edge device." The deployment guide refers to "physical edge devices" plural. Which device are we naming here ... maybe the industrial PC? And do we change this name only for physical deployments?

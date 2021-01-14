@@ -227,6 +227,7 @@ To enable the AWS IoT SiteWise connector running in AWS IoT Greengrass to ingest
 
 ==== Dataflow option 1
 When using dataflow option 1, verify that data is flowing into AWS IoT SiteWise.
+
 . Now that you've trusted the AWS IoT SiteWise gateway connector certificate, return to the AWS IoT SiteWise console.
 . Open the AWS IoT SiteWise console. Choose the menu icon on the left-hand side of the page, and choose *Build*, *Assets*.
 . In the asset tree on the left, drill down to an asset (such as Hauloff or Conveyor), choose it, and then choose the *Measurements* tab for that asset.
@@ -349,7 +350,7 @@ Following are the values for <bucket_identifiers> for each deployment:
 * lambdazipsbucket
 . Force a reset of the AWS IoT Greengrass group.
 .. Open the AWS IoT Greengrass console.
-.. Choose the AWS IoT Greengrass group with the *Name for the Edge device* parameter name provided to the stack.
+.. Choose the AWS IoT Greengrass group with the *EdgeDeviceID* parameter provided to the stack.
 .. Under *Actions*, choose *Reset Deployments*.
 .. Select the check box indicating that you want to force the reset.
 .. Choose *Reset Deployment*.

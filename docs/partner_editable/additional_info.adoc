@@ -174,7 +174,7 @@ assetEntry = {
 . Create a data type.
 .. Nagivate to the *Tag Browser*, expand *Tags*, open the context (right-click) *Data Types* menu, and choose *New Tag*, *New Data Type*.
 .. Under *Properties*, name the data type *Pump*, and choose *Apply*.
-. Configure the Tags for the data type
+. Configure the tags for the data type.
 .. Tag 1: Temperature
 .. To the left of the *Properties* section, choose the *Add Tag* button, and choose *OPC Tag*: 
 
@@ -281,7 +281,7 @@ After the message is published, a dataset called `imcDataSet` populates the Quic
 [link=images/QS-Datasets.png]
 image::../images/QS-Datasets.png[QuickSight datasets]
 
-Now that you've created a dataset in QuickSight, you can create visualizations with the data. For details, see https://docs.aws.amazon.com/quicksight/latest/user/welcome.html[What Is Amazon QuickSight?^].
+Now that you've created a dataset in QuickSight, you can create visualizations with the data. For details, see https://docs.aws.amazon.com/quicksight/latest/user/welcome.html[What Is Amazon QuickSight?^]
 
 === Launch the AWS CloudFormation stack from your own S3 bucket
 
