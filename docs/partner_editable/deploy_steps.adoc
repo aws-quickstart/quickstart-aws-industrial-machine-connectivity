@@ -37,7 +37,7 @@ Each deployment takes about {deployment_time} to complete.
 
 . Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see link:#_deployment_options[Deployment options] earlier in this guide.
 
-[cols=2*]
+[cols="3,1"]
 |===
 ^|http://qs_launch_permalink[Deploy {partner-product-name} into a new VPC on AWS^]
 ^|http://qs_template_permalink[View template^]
