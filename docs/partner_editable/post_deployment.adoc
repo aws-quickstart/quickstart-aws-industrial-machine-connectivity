@@ -10,13 +10,11 @@ When the AWS CloudFormation stack is completed, follow these steps to configure 
 * <<Clean up the AWS CloudFormation stack deployment>>
 
 === Deploy edge software (physical deployments only)
-This step is only necessary if deploying one of the physical deployment options (greenfield or brownfield).
+If you're deploying one of the physical deployment options (greenfield or brownfield), configure the AWS CLI to point to the AWS account you're using for the {partner-product-short-name} Quick Start.
 
-Configure the AWS CLI to point to the AWS account you're using for the {partner-product-short-name} Quick Start.
+The physical-brownfield deployment mode does not come with a configured set of project tags similar to the virtual deployment. It comes with a set of device simulations that you can configure to represent a project-tag structure similar to the virtual deployment-tag structure. You can also create your own structure. You can configure this deployment to work with a physical PLC test harness. 
 
-The physical-brownfield deployment mode does not come with a configured set of project tags similar to the virtual deployment but does come with a set of device simulations that can be configured to represent a project tag structure similar to the virtual deployment tag structure (or your own structure entirely). This deployment can be configured to work with a physical PLC test harness. 
-
-The physical-greenfield deployment mode is compatible with either Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] or PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^]. This deployment option does not bootstrap any partner edge software. The only edge software application that is bootstrapped on the physical hardware as part of the deployment is AWS IoT Greengrass.
+The physical-greenfield deployment mode is compatible with either Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] or PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^]. This deployment mode does not bootstrap any partner edge software. The only edge software application that is bootstrapped on the physical hardware as part of the deployment is AWS IoT Greengrass.
 
 ==== Retrieve and run the {partner-product-short-name} edge-device bootup script
 . Open a terminal on the physical hardware.
@@ -26,82 +24,56 @@ The physical-greenfield deployment mode is compatible with either Inductive Auto
 
 . Ensure that you are in the `home/ubuntu` directory.
 . Use the command line to retrieve the deployment script from your stack's S3 bucket. Before running this command, ensure you have the AWS CLI configured in the Region where you are launching the {partner-product-short-name} Quick Start stack.
-. In your home directory run this command to get the physical deployment bootup script from an S3 bucket (replacing the information in brackets):
+. In your home directory, run this command to get the physical deployment bootup script from an S3 bucket (replacing the information in brackets):
 
  aws s3api get-object --bucket <DependenciesBucket> --key <BootupScript>
 
-. Get the values of <DependenciesBucket> and <BootupScript>. 
-.. Open the AWS CloudFormation service console.
+. Get the values for <DependenciesBucket> and <BootupScript>. 
+.. Open the AWS CloudFormation console.
 .. Open the *NESTED* {partner-product-short-name} Quick Start stack.
-.. Choose the *Outputs* tab, and follow these instructions:
-
-[cols="1,2a"]
-.Options for bucket name and bootup script
-|===
-|*Key*
-|*Value*
-
-|<DependenciesBucket> 
-|Dependencies bucket name (See the green callout in <<dependenciesbucket-and-bootupscript>>.)
-
-|<BootupScript> 
-| Find the key corresponding to your configuration, and select its value. (See the blue callout in <<dependenciesbucket-and-bootupscript>>.)
-
-* <<pre-reqs.adoc#BootupScriptGreenfieldOption1,BootupScriptGreenfieldOption1>>
-* <<pre-reqs.adoc#BootupScriptGreenfieldOption2a,BootupScriptGreenfieldOption2a>>
-* <<pre-reqs.adoc#BootupScriptGreenfieldOption2b,BootupScriptGreenfieldOption2b>>
-* <<pre-reqs.adoc#BootupScriptBrownfieldAllOptions,BootupScriptBrownfieldAllOptions>>	 
-
-|===
+.. Choose the *Outputs* tab.
+.. Copy the value for the `DependenciesBucket` key (highlighted in green in <<dependenciesbucket-and-bootupscript>>).
+.. Find the `BootupScript` key that corresponds to your configuration, and copy its value (highlighted in blue in <<dependenciesbucket-and-bootupscript>>).
 
 [#dependenciesbucket-and-bootupscript]
-.<DependenciesBucket> and <BootupScript>
+.Finding the values for <DependenciesBucket> and <BootupScript>
 [link=images/DependenciesBucket.png]
 image::../images/DependenciesBucket.png[Dependencies bucket]
 
-==== Execute the {partner-product-short-name} edge-device bootup script
+==== Run the {partner-product-short-name} edge-device bootup script
 
-. Use the command line to make the file executable. (`<BootupScript>` was fetched in the previous step using the `aws s3api get-object` CLI command described earlier.)
+. Run the following command to make the file executable. (Replace `<BootupScript>` with the value that was fetched in the previous step using the `aws s3api get-object` CLI command described earlier.)
   
   chmod +x <BootupScript>.sh
 
-. Open the AWS CloudFormation console, open the *NESTED* {partner-product-short-name} Quick Start  stack, choose the *Outputs* tab, and copy the bootup CLI command from the *Value* of the following key-value pairs:
+. Get the bootup CLI command.
+.. Open the AWS CloudFormation console.
+.. Open the *NESTED* {partner-product-short-name} Quick Start stack.
+.. Choose the *Outputs* tab.
+.. Find the `FullScriptParams` key that corresponds to your configuration, and copy its value (highlighted in blue in <<physical-deployment-bootup-scripts>>). This is the bootup CLI command.
 
-[cols="1,2a"]
-.Options for key-value pairs
-|===
-|*Key*
-|*Value*
-
-| FullScriptParamsGreenfield1and2a
-| Copy the command from the AWS CloudFormation *Value* column. This option is for the following: 
-
-* deployment type = <<pre-reqs.adoc#Physical-Greenfield,Physical-Greenfield>> 
-* dataflow option = <<pre-reqs.adoc#Option 1 (OPC UA to SiteWise),Option 1 (OPC UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>>
-
-| FullScriptParamsGreenfield2b
-| Copy the command from the AWS CloudFormation *Value* column. This option is for the following: 
-
-* deployment type = <<pre-reqs.adoc#Physical-Greenfield,Physical-Greenfield>>
-* dataflow option = <<pre-reqs.adoc#Option 2b (MQTT to Greengrass to IoT Core),Option 2b (MQTT to Greengrass to IoT Core)>>
-
-| FullScriptParamsBrownField
-| Copy the command from the AWS CloudFormation *Value* column. This option is for the following: 
-
-* deployment type = <<pre-reqs.adoc#Physical-Brownfield,Physical-Brownfield>>
-* dataflow option = <<pre-reqs.adoc#Option 1 (OPC UA to SiteWise),Option 1 (OPC UA to SiteWise)>> or <<pre-reqs.adoc#Option 2a (MQTT to IoT Core),Option 2a (MQTT to IoT Core)>> or <<pre-reqs.adoc#Option 2b (MQTT to Greengrass to IoT Core),Option 2b (MQTT to Greengrass to IoT Core)>>.
-
-|===
-
-.Physical deployment bootup scripts
+[#physical-deployment-bootup-scripts]
+.Finding the physical-deployment bootup scripts
 [link=images/BootupCommand.png]
 image::../images/BootupCommand.png[Bootup command]
 
+The three `FullScript` keys correspond to these configurations:
+
+* Key: `FullScriptParamsBrownField`
+** Deployment type = physical-brownfield
+** Dataflow option = option 1 (OPC UA to SiteWise) or option 2a (MQTT to IoT Core) or option 2b (MQTT to Greengrass to IoT Core)
+* Key: `FullScriptParamsGreenfield1and2a`
+** Deployment type = physical-greenfield 
+** Dataflow option = option 1 (OPC UA to SiteWise) or option 2a (MQTT to IoT Core)
+* Key: `FullScriptParamsGreenfield2b`
+** Deployment type = physical-greenfield
+** Dataflow option = option 2b (MQTT to Greengrass to IoT Core) 
+
 [start=3]
-. In the command string, replace `<HardwareIP>` with the physical device's private IP address.
+. In the command string, replace `[HardwareIP]` with the physical device's private IP address.
 . Use the command line to run the deployment script, which should resemble something like the following (filled in with your stack-specific values):
  
- ./physical-greenfield-option1.sh imc-snow-devicesbucketresource-4wjvs58vbhwj SnowCone/SnowConeCore.tar.gz 6tppoqlka4 us-east-1 SnowCone <Hardware-IP> SnowCone/SnowConeDevice.tar.gz <IoT Core ATS Endpoint>
+ ./physical-greenfield-option1.sh imc-snow-devicesbucketresource-4wjvs58vbhwj SnowCone/SnowConeCore.tar.gz 6tppoqlka4 us-east-1 SnowCone [Hardware-IP] SnowCone/SnowConeDevice.tar.gz <IoT Core ATS Endpoint>
 
 ==== Create a tag hierarchy in Ignition (physical-greenfield only)
 You represent your data in Ignition by creating a project tag hierarchy. The source of this data can be physical PLCs or simulated devices in Ignition. 
@@ -111,7 +83,7 @@ You represent your data in Ignition by creating a project tag hierarchy. The sou
 
  `http://<hardwarePrivateIP>:8088`
 
-. In the top right corner, choose *Get Designer*.
+. In the top-right corner, choose *Get Designer*.
 . Install Ignition Designer for your operating system.
 . Open Ignition Designer and connect to your Ignition server.
 . Launch the Designer.
@@ -157,7 +129,7 @@ Choose the Asset Model Converter (AMC) driver you configured in the AWS CloudFor
 * <<AMCDriver—IgnitionFileExport>>
 
 ==== AMCDriver—IgnitionCirrusLink
-This AMCDriver option runs automatically with the launch of the {partner-product-short-name} Quick Start virtual option. Proceed to the next section: <<Enable the AWS IoT SiteWise connector>>.
+This AMCDriver option runs automatically when you launch the {partner-product-short-name} Quick Start virtual option. Proceed to the next section: <<Enable the AWS IoT SiteWise connector>>.
 
 ==== AMCDriver—IgnitionFileExport
 This section walks through exporting the JSON file from Ignition, describing your project's tag hierarchy, and uploading it to an S3 bucket (created during AWS CloudFormation stack formation) to initiate the AMC workflow.
@@ -182,11 +154,11 @@ This section walks through exporting the JSON file from Ignition, describing you
 
   `http://<ignition_ec2_public_ip>:8088`
 
-. Export tag definition JSON file.
+. Export tag-definition JSON file.
 .. Open the Ignition Designer launcher app.
 .. Under the gateway tile you just added, choose *Launch*. 
 .. Supply the user name and password (defined previously), and choose *Login*.
-.. In the tag browser, under *Tag Providers*, choose *default*, and choose *Export*. Save this tag definition JSON file in a local location that you can access.
+.. In the tag browser, under *Tag Providers*, choose *default*, and choose *Export*. Save this tag-definition JSON file in a local location that you can access.
 
 .Export tags from Ignition
 [link=images/IgnitionExportTags.png]
@@ -307,13 +279,13 @@ Check the Lambda function responsible for creating the models and assets in AWS 
 . Choose *View logs in CloudWatch*.
 . Click into the most recent log stream and find the error message.
 
-==== Issue 4: Data from the MQTT transmission module doesn't show up in IoT Cloud 
+==== Issue 4: Data from the MQTT transmission module doesn't show up in the IoT cloud 
 
 . Get the public IP address of that instance, and load a URL like this into any browser (replacing the information in brackets):
 
  http://<hardwarePrivateIP>:8088
 
-. Open the Ignition web UI is open, you should see a gear like icon on the left labeled *Config*. Choose that. When prompted, log in. If you haven't already changed your password, do so after you've logged in. These are the default credentials:
+. Open the Ignition web UI. Choose the gear-like icon on the left labeled *Config*. When prompted, log in. If you haven't already changed your password, do so after you've logged in. These are the default credentials:
 * User name: admin
 * Password: password
 . Choose *MQTT Transmission*, *Settings*, *Server*. Confirm that the connectivity shows 1 of 1. If it doesn't, choose *Edit* and do the following:
@@ -335,7 +307,7 @@ Follow these steps to clean up the Quick Start AWS CloudFormation stack deployme
 
 . Open the AWS CloudFormation console, and delete the base stack (not the stack named *NESTED*) to clean up the account as much as possible. Most of the resources are deleted, but the stack deletion fails due to nonempty S3 buckets and potentially a deployed AWS IoT Greengrass group (for all virtual options by default, and for all physical deployments that have been completed on a piece of hardware).
 . Empty the S3 buckets.
-.. Sign in to the AWS Console, and open the Amazon S3 service.
+.. Sign in to the AWS Management Console, and open the Amazon S3 service.
 .. In the search bar, enter your stack name.
 .. For each bucket that is associated with the stack, choose the bucket, and choose *Empty* under the search bar. This is the bucket-naming convention (replacing the bracketed elements): 
 

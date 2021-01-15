@@ -1,6 +1,6 @@
 //This document is the ASCII DOC version of the "IMC—Virtual Deployment User Guide" word document found in the IMC Quick Start Github repo (URL: https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx)
 
-//TODO Shivansh, Why do we have this Asciidoc version in our set of files in the partner-editable folder? Are we replacing the Word docs?
+//TODO Shivansh, Why do we have this Asciidoc version in our set of files in the partner-editable directory? Are we replacing the Word docs?
 
 //TODO Shivansh, If we need an Asciidoc version for this user guide, then also for the other two Word user guides?
 
@@ -49,14 +49,14 @@ Refer to the following sections as needed:
 - Virtual Deployment FAQ—Refer to this section for FAQs regarding {partner-product-short-name} Quick Start.
 
 ==== Launch the AWS CloudFormation stack
-To launch the virtual deployment of the {partner-product-short-name} Quick Start, sign in to the AWS Console, and open the AWS CloudFormation console. Create a new stack, and choose *with new resources (standard)*. 
+To launch the virtual deployment of the {partner-product-short-name} Quick Start, sign in to the AWS Management Console, and open the AWS CloudFormation console. Create a new stack, and choose *with new resources (standard)*. 
 
 ===== Step 1: Specify templates
 
 * Prerequisites:
 ** Choose *Template is ready*.
 * Choose one of the following templates:
-** Template source: Leave as default – *Amazon S3 URL*. Most users want to use `IMC-main.template.yaml`, the main template that's in the AWS Quick Start S3 bucket. 
+** Template source: Leave as default – *Amazon S3 URL*. Most users want to use `IMC-main.template.yaml`, the main template in the AWS Quick Start S3 bucket. 
 //TODO Shivansh, I changed "master" to "main" in the filename above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note. (This content isn't in the generated deployment guide. Does this need to get edited a Word doc??)
 *** Main template S3 URL: https://aws-quickstart.s3.amazonaws.com/quickstart-aws-industrial-machine-connectivity/templates/IMC-main.template.yaml
 //TODO Shivansh, I changed "master" to "main" in the URL above even though the file is still named "master." Please make sure that the filename is changed in GitHub before removing this TODO note.
