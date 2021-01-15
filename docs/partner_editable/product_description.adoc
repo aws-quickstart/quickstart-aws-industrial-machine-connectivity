@@ -4,11 +4,11 @@
 
 :xrefstyle: short
 
-The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value for a minimum viable product (MVP). For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop and deploy a complete production architecture that addresses all their critical use cases. 
+The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value for a minimum viable product (MVP). For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop a complete production architecture that addresses all their critical use cases. 
 
 The {partner-product-short-name} Quick Start converts definitions of a customer's asset hierarchy (such as factory, lines, machines, tags) from third-party (AWS Partner) edge software applications to equivalent definitions in AWS IoT SiteWise. Partner edge applications include Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] and PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^].
 
-After asset hierarchies are defined in AWS IoT SiteWise, your data can be ingested continuously to the AWS Cloud. All the pertinent metadata is readily accessible to applications that can use that data to deliver business value. For example, you may set up dashboards that monitor the condition of your assets, as shown at the top of the overview diagram in <<IMC-QS-overview>>. (The example dashboard shown is labeled "MVP" for minimum viable product). Elements of the Quick Start are outlined in the dotted orange box. The text at the right describes what happens from the edge (bottom) and the cloud (top).
+After asset hierarchies are defined in AWS IoT SiteWise, your data can be ingested continuously to the AWS Cloud. All the pertinent metadata is readily accessible to applications that use that data to deliver business value. For example, you may set up dashboards that monitor the condition of your assets, as shown at the top of <<IMC-QS-overview>>. (The example dashboard shown is labeled "MVP" for minimum viable product). Elements of the Quick Start are outlined in the dotted orange box. The text at the right describes what happens from the edge (bottom) and the cloud (top).
 
 [#IMC-QS-overview]
 .Overview of the {partner-product-name} Quick Start
@@ -31,4 +31,4 @@ This Quick Start includes the software and a list of hardware required to connec
 * KEPServerEX by PTC
 ** KEPServerEX Project File Export
 
-You deploy this Quick Start in either virtual mode (for evaluation and training) or physical mode (for customer deployments). The mode you choose depends on whether you're using virtual edge hardware (including an Amazon Elastic Compute Cloud, or Amazon EC2, instance) or physical edge hardware (including an industrial PC). The mode determines how you configure connectivity and security. All other cloud-based resources are largely the same for virtual and physical deployments.
+You deploy this Quick Start in either virtual mode (for evaluation and training) or physical mode (for customer deployments). The mode you choose depends on whether your edge hardware is virtual or physical. The architecture for virtual edge hardware includes an Amazon Elastic Compute Cloud (Amazon EC2) instance. The architecture for physical edge hardware includes an industrial PC. The mode determines the way you configure connectivity and security. All other cloud-based resources are largely the same for virtual and physical deployments.

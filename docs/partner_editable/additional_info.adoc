@@ -58,18 +58,18 @@ The Asset Model Converter (AMC) code is in two separate Lambda functions located
 * AssetModelConverter. The AMC covers two functions: AMC1 and AMC2. 
 ** AMC1 
 *** This code is initiated by an Amazon S3 object creation from the incoming bucket. It has its reserved concurrent executions set to 1 to make sure that only a single instance of Lambda can ever fire at the same time. This has been done because the Ignition Cirrus Link module can birth the asset structure as multiple discrete MQTT messages, each of which becomes a file object in Amazon S3.
-*** The core logic of the AMC1 comes in the form of the main handler file, `assetModelConverter.py`. It contains the base Lambda handler function, which in turn calls into the AssetModelConverter class to execute the handling of a given S3 object-creation event. This code in turn calls the relevant driver code to handle the asset structure files.
+*** The core logic of the AMC1 comes in the form of the main handler file, `assetModelConverter.py`. It contains the base Lambda handler function, which in turn calls in to the AssetModelConverter class to handle a given S3 object-creation event. This code in turn calls the relevant driver code to handle the asset structure files.
 *** AMC drivers in AMC1 are responsible for parsing the incoming asset structure files and converting them into a normalized format that is then stored into DynamoDB. See the "Creating AMC Drivers" section of the Getting Started guide for more details on creating drivers and the DynamoDB normalized format.
 //TODO Shivansh, What is this Getting Started guide (above)? How do people find it?
 ** AMC2
-*** This relevant code file here is `createSitewiseResources.py`. This contains code to take the normalized DynamoDB format, and create relevant AWS IoT Sitewise assets and models from that format. Changes are marked in the DynamoDB table to various assets or models that require updates or creation.
-*** All AWS IoT Sitewise interactions take place in the `sitewiseUtils.py` code. 
+*** This relevant code file here is `createSitewiseResources.py`. This contains code to take the normalized DynamoDB format, and create relevant AWS IoT SiteWise assets and models from that format. Changes are marked in the DynamoDB table to various assets or models that require updates or creation.
+*** All AWS IoT SiteWise interactions take place in the `sitewiseUtils.py` code. 
 *** Only additive changes are supported.
 *** The AMC2 process:
-. Model creation. The DynamoDB models table is queried to look for models that require creation. Those are created in AWS IoT Sitewise.
-. Asset creation. The DynamoDB assets table is also queried, looking for records that are marked as needing creation. Those assets, instances of the models created during 'Model Creation' are then created in AWS IoT Sitewise.
-. Model hierarchies. In this step models are associated with each other in a hierarchy that are tagged as having such a parent-child relationship.
-. Asset associations. Similarly in this final step, assets that are tagged as having a parent-child relationship are associated with each.
+. Model creation. The DynamoDB models table is queried to look for models that require creation. Those are created in AWS IoT SiteWise.
+. Asset creation. The DynamoDB assets table is also queried, looking for records that are marked as needing creation. Those assets, instances of the models created during model creation, are then created in AWS IoT SiteWise.
+. Model hierarchies. In this step, models are associated with each other in a hierarchy and tagged as having a parent-child relationship.
+. Asset associations. Similarly, in this final step, assets that are tagged as having a parent-child relationship are associated with each other.
 
 === Creating AMC drivers
 
@@ -99,6 +99,7 @@ The Asset Model Converter (AMC) code is in two separate Lambda functions located
 ... Add an item to the list of AMCDrivers (parameter section):
 .... `<name_of_driver>`
 
+//TODO Shivansh, What is the numbering supposed to be in the steps above? I gave up trying to interpret it. :)
 
 === Artifacts
 
@@ -111,7 +112,7 @@ The following directories and files are necessary for running an {partner-produc
     NOTICE.txt
     README.md
 
-* *quickstart-IMC/*: The root directory in the S3 bucket, where the rest of the folders live.
+* *quickstart-IMC/*: The root directory in the S3 bucket, where the rest of the directories live.
 * *functions/*: Contains zipped Lambda code that is used for various pieces of the {partner-product-short-name} Quick Start.
 * *scripts/*: Contains the scripts that are run on physical hardware if running a physical deployment.
 * *templates/*: Contains the various AWS CloudFormation templates that are deployed depending on the deployment options selected during stack creation.
@@ -172,7 +173,7 @@ assetEntry = {
 ... Password: password
 ... If you haven't already, change your password after you've logged into the Ignition web UI.
 . Create a data type.
-.. Nagivate to the *Tag Browser*, expand *Tags*, open the context (right-click) *Data Types* menu, and choose *New Tag*, *New Data Type*.
+.. Navigate to the *Tag Browser*, expand *Tags*, open the context (right-click) *Data Types* menu, and choose *New Tag*, *New Data Type*.
 .. Under *Properties*, name the data type *Pump*, and choose *Apply*.
 . Configure the tags for the data type.
 .. Tag 1: Temperature
@@ -288,9 +289,9 @@ Now that you've created a dataset in QuickSight, you can create visualizations w
 This section tells how to extend or modify the {partner-product-short-name} Quick Start with new features or capabilities. Here's the high-level process: clone the https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity[{partner-product-short-name} Quick Start repo^], create a new S3 bucket, and add the repo assets to that bucket. The following instructions detail the process:
 
 . Create a new S3 bucket. and give it a unique name such as *imc-dev-123*.
-. In that S3 bucket, create a folder called *quickstart-IMC*.
-. Download the public {partner-product-short-name} Quick Start Github repo (https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity) as a zip file.
-. Unzip the downloaded file, and copy all the contents of the unzipped folder (Github repo contents) into the *quickstart-IMC* folder in your S3 bucket. The structure then resembles the following structure:
+. In that S3 bucket, create a directory called *quickstart-IMC*.
+. Download the public {partner-product-short-name} Quick Start GitHub repo (https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity) as a zip file.
+. Unzip the downloaded file, and copy all the contents of the unzipped folder (GitHub repo contents) into the *quickstart-IMC* directory in your S3 bucket. The structure then resembles the following structure:
 .. S3 bucket name: `imc-dev-123`
 .. S3 bucket content:
 

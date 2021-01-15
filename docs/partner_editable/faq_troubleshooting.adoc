@@ -59,8 +59,8 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Yes. Follow these steps:
 
-. If any of the models or assets you want to create share a name with the models or assets created in the first pass of the AMC execution, you'll need to delete the models and assets in AWS IoT SiteWise.
-. The second action you'll need to take is clearing out the following DynamoDB tables associated with the initial {partner-product-short-name} Quick Start deployment (replacing the information in brackets):
+. If any of the models or assets you want to create shares a name with the models or assets created in the first pass of the AMC execution, delete the models and assets in AWS IoT SiteWise.
+. Clear out the following DynamoDB tables associated with the initial {partner-product-short-name} Quick Start deployment (replacing the information in brackets):
 .. Table 1: `<stack-name>-asset-model-table`
 .. Table 2: `<stack-name>-asset-table`
 
@@ -93,11 +93,11 @@ image::../images/RefreshBirthCertificates.png[Refresh birth certificates]
 
 *Q.* How do I add a QuickSight visual?
 
-*A.* Users may create Amazon QuickSight visuals for the data that is put in the S3 bucket by the Kinesis Data Firehose. Prior to creating these visuals, complete the following prerequisite steps:
+*A.* You may create Amazon QuickSight visuals for the data that is put in the S3 bucket by the Kinesis Data Firehose. Before you create these visuals, complete the following prerequisite steps:
 
 Prerequisites:
 
-* Sign in to the AWS Console, and open the QuickSight service console.
+* Sign in to the AWS Management Console, and open the QuickSight service console.
 ** If you have not previously used QuickSight, you are prompted to grant access to QuickSight. See https://docs.aws.amazon.com/quicksight/latest/user/getting-started.html[Getting Started with Data Analysis in Amazon QuickSight^] for additional details.
 * Create a QuickSight visual.
 ** The data source is the S3 bucket that receives data from the AWS IoT Core rule. The S3 bucket is named `<stack_name>-imcs3bucket-<hash>` (replacing the information in brackets).
@@ -110,11 +110,11 @@ Prerequisites:
 How do I add a QuickSight visual?
 
 *A.*
-Users may create Amazon QuickSight visuals for the data that is put in the S3 bucket by the Kinesis Data Firehose. Prior to creating these visuals, complete the following prerequisite steps:
+You may create Amazon QuickSight visuals for the data that is put in the S3 bucket by the Kinesis Data Firehose. Before you create these visuals, complete the following prerequisite steps:
 
 Prerequisites:
 
-. Sign in to the AWS Console, and open the QuickSight service console.
+. Sign in to the AWS Management Console, and open the QuickSight service console.
 .. If you have not previously used QuickSight, you are prompted to grant access to QuickSight. See https://docs.aws.amazon.com/quicksight/latest/user/getting-started.html[Getting Started with Data Analysis in Amazon QuickSight^] for additional details.
 . Create a QuickSight visual.
 .. The data source is the S3 bucket that receives data by the AWS IoT Core rule. The S3 bucket is named `<stack_name>-imcs3bucket-<hash>` (replacing the information in brackets).
@@ -145,7 +145,7 @@ First, verify that the Ignition trial period (2 hours) has not expired. If that 
 
 *Can't access Ignition web UI*
 
-Ensure that you're attempting to make the connection from the same network you defined as your public IP while setting up the stack. If you're attempting from a different network, you'll need to edit the security group associated with the two EC2 instances. (It's the same security group.)
+Ensure that you're attempting to connect from the same network you defined as your public IP while setting up the stack. If you're attempting from a different network, edit the security group associated with the two EC2 instances. (It's the same security group.)
 
 . Open the EC2 console.
 . Highlight one of the two EC2 instances that has been created for your deployment.
@@ -202,6 +202,4 @@ If these settings are as shown in <<ignition-mqtt-filtered>> and you're still re
 . Choose *View logs in CloudWatch*.
 . Click into the most recent log stream, and find the error message to troubleshoot.
 
-//TODO Shivansh, In the parameter tables following this section, for the main template under QSS3KeyPrefix, we say AllowedPattern: ^([0-9a-zA-Z-.]+/)*$. Are these parentheses above supposed to be here? We don't include parens for this parameter in IMC-workload.template.yaml or in this Quip: https://quip-amazon.com/lIOaA1eoAGDz/SigV4-Quick-Start-Changes.
-
-//TODO Shivansh, In the parameter tables, for both templates under EdgeDeviceID, we give the label as "Name for the edge device." The deployment guide refers to "physical edge devices" plural. Which device are we naming here ... maybe the industrial PC? And do we change this name only for physical deployments?
+//TODO Shivansh, In the parameter tables following this section, in IMC-main.template.yaml under QSS3KeyPrefix, we say AllowedPattern: ^([0-9a-zA-Z-.]+/)*$. Are these parentheses above supposed to be here? We don't include parentheses for this parameter in IMC-workload.template.yaml or in this Quip: https://quip-amazon.com/lIOaA1eoAGDz/SigV4-Quick-Start-Changes.

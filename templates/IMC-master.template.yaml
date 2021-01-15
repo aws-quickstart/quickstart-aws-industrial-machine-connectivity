@@ -46,9 +46,9 @@ Metadata:
       VPCCIDR:
         default: VPC CIDR
       EC2KeyPairName:
-        default: SSH key name
+        default: SSH key-pair name
       EdgeDeviceID:
-        default: Name for the edge device 
+        default: Name for the edge-gateway device 
       DeploymentType:
         default: Type of deployment
       DeploymentOption:
@@ -117,12 +117,12 @@ Parameters:
     Type: String
   EdgeDeviceID:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
-    ConstraintDescription: Edge device ID name can include numbers, lowercase
+    ConstraintDescription: Edge-gateway device name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
       (-).
     Type: String
     Default: Virtual
-    Description: Name for the edge device. This string can include
+    Description: If your deployment uses a physical edge-gateway device (industrial PC), enter a name. This string can include
       numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
       or end with a hyphen (-).
   EC2KeyPairName:
@@ -172,7 +172,7 @@ Parameters:
       - IgnitionCirrusLink
       - IgnitionFileExport
       - KepwareFileExport
-    Description: Choose the driver that the Asset Model Converter uses to translate hierarchy data.   
+    Description: The driver that the Asset Model Converter uses to translate hierarchy data. If you're not using the default driver, choose IgnitionFileExport or KepwareFileExport.
 Conditions:
   UsingDefaultBucket: !Equals
     - !Ref QSS3BucketName
