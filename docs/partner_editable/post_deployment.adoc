@@ -345,3 +345,5 @@ Following are the values for <bucket_identifiers> for each deployment:
  apt remove aws-iot-greengrass-core 
  rm -rf /greengrass
  rm -rf /var/sitewise
+
+ //TODO Shivansh, I removed the word "kit" throughout this guide except for the lines of code above. We also don't mention "kit" on the landing page. Is this a term you expect to use when talking with partners about this Quick Start? If so, exactly what do we mean by "kit"? And where do we need to mention the kit in this guide?
