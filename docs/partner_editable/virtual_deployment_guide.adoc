@@ -1,10 +1,10 @@
 //This document is the ASCII DOC version of the "IMC—Virtual Deployment User Guide" word document found in the IMC Quick Start Github repo (URL: https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/master/documentation/IMC%20-%20Virtual%20Deployment%20User%20Guide.docx)
 
-//TODO Shivansh, Why do we have this Asciidoc version in our set of files in the partner-editable directory? Are we replacing the Word docs?
+//TODO Shivansh, Why do we have this Asciidoc version in our set of files in the partner-editable directory? Are we replacing the Word docs? - We can get rid of this file. Not needed anymore.
 
-//TODO Shivansh, If we need an Asciidoc version for this user guide, then also for the other two Word user guides?
+//TODO Shivansh, If we need an Asciidoc version for this user guide, then also for the other two Word user guides? - Delete it.
 
-//TODO Shivansh, Note that the URL above has "master" in it. That needs to change when we update the GitHub "master" reference.
+//TODO Shivansh, Note that the URL above has "master" in it. That needs to change when we update the GitHub "master" reference. - That file isn't needed. Will delete.
 
 === Virtual deployment guide
 

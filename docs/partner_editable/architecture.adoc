@@ -22,9 +22,9 @@ As shown in <<architecture-virtual>>, the virtual deployment of the {partner-pro
 * Amazon S3. The manufacturing data is stored as an S3 data lake.
 * Amazon Athena and Amazon QuickSight. You use these services to build custom business-intelligence dashboards and visualizations for data stored in the data lake.
 
-//TODO Shivansh, The draft said that the virtual deployment could use either Ignition or KEPServerEX, so I showed both icons in the diagram. Correct?
+//TODO Shivansh, The draft said that the virtual deployment could use either Ignition or KEPServerEX, so I showed both icons in the diagram. Correct? - Yes.
 
-//TODO Shivansh, In the diagram, I swapped in the KEPServerEX logo for the generic Kepware logo. Acceptable?
+//TODO Shivansh, In the diagram, I swapped in the KEPServerEX logo for the generic Kepware logo. Acceptable? - That's fine.
 
 Deploying this Quick Start in physical mode (in a factory), builds an environment like the one shown in <<architecture-physical>>. Elements of the Quick Start are outlined in the dotted orange box.
 
