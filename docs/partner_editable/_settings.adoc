@@ -4,8 +4,8 @@
 //:partner-company-name:
 :doc-month: January
 :doc-year: 2021
-//:partner-contributors:
-:quickstart-contributors: Thomas Cummins and Shivansh Singh, AWS
+:partner-contributors: Thomas Cummins, AWS IoT Partner team
+:quickstart-contributors: Shivansh Singh, AWS Quick Start team
 :deployment_time: 10 minutes
 :default_deployment_region: us-east-1
 :parameters_as_appendix:

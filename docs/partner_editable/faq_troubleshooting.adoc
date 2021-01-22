@@ -220,6 +220,3 @@ If these settings are as shown in <<ignition-mqtt-filtered>> and you're still re
 .. Replace the client certificate file with the `.pem` file from the tarball package.
 .. Replace the client private key file with the `.private` file from the tarball package.
 .. Choose *Save Changes*, and make sure that the connectivity says *1 of 1*.
-
-
-//TODO Shivansh, In the parameter tables following this section, in IMC-main.template.yaml under QSS3KeyPrefix, we say AllowedPattern: ^([0-9a-zA-Z-.]+/)*$. Are these parentheses above supposed to be here? We don't include parentheses for this parameter in IMC-workload.template.yaml or in this Quip: https://quip-amazon.com/lIOaA1eoAGDz/SigV4-Quick-Start-Changes. - Fixed.

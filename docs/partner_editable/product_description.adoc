@@ -4,11 +4,9 @@
 
 :xrefstyle: short
 
-//TODO Marcia, Can you compare the text in this section with the text of the same section in the following link. It seems to me that the following link has more details which is important to keep. https://aws-quickstart.github.io/quickstart-aws-industrial-machine-connectivity/#_industrial_machine_connectivity_on_aws
-
 The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value for a minimum viable product (MVP). For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop a complete production architecture that addresses all their critical use cases. 
 
-The {partner-product-short-name} Quick Start converts definitions of a customer's asset hierarchy (such as factory, lines, machines, tags) from third-party (AWS Partner) edge software applications to equivalent definitions in AWS IoT SiteWise. Partner edge applications include Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] and PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^].
+At the heart of the {partner-product-short-name} Quick Start is the Asset Model Converter (AMC). The AMC is a serverless, module-based framework. It automatically converts definitions of a customer's asset hierarchy (such as factory, lines, machines, tags) from third-party (AWS Partner) edge software applications to equivalent definitions in AWS IoT SiteWise models and assets. Partner edge applications include Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] and PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^].
 
 After asset hierarchies are defined in AWS IoT SiteWise, your data can be ingested continuously to the AWS Cloud. All the pertinent metadata is readily accessible to applications that use that data to deliver business value. For example, you may set up dashboards that monitor the condition of your assets, as shown at the top of <<IMC-QS-overview>>. (The example dashboard shown is labeled "MVP" for minimum viable product). Elements of the Quick Start are outlined in the dotted orange box. The text at the right describes what happens from the edge (bottom) and the cloud (top).
 
@@ -16,10 +14,6 @@ After asset hierarchies are defined in AWS IoT SiteWise, your data can be ingest
 .Overview of the {partner-product-name} Quick Start
 [link=images/imc_framework.png]
 image::../images/imc_framework.png[IMC Quick Start overview]
-
-//TODO Shivansh, Please supply the source file that Figure 1 was generated from. - I have asked Thomas for the source file. I'll attach it to the sim as soon as I have it.
-
-//TODO When Marcia has this source file, will update this diagram to avoid saying "IMC framework". Per Shivansh, say "IMC QS" instead (but keep "ACM framework"). Other edits I'll make: Capitalize "Cloud" when it follows "AWS"; "near-real-time"; "plant floor" > "factory floor"; "historian" lowercase; label purple icon "Amazon QuickSight"; no key in lower-right corner.
 
 The {partner-product-short-name} Quick Start helps connect industrial assets to AWS Cloud services along with visualizing data using AWS IoT SiteWise Monitor and Amazon QuickSight dashboards. The IoT partner edge software applications handle the industrial protocol translation from the programmable logic controllers (PLCs), other devices, historians, and supervisory control and data acquisition (SCADA) systems they connect to. The {partner-product-short-name} architecture integrates both the data collected by the edge software applications and the asset model hierarchy that they maintain. 
 

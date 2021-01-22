@@ -1,11 +1,3 @@
-
-//Add sections for:
-//Virtual_Deployment.adoc
-//Physical_Greenfield_Deployment.adoc
-//Physical-Brownfield.adoc
-
-//TODO Shivansh, Are these three comments above action items for someone? Or has that content already been folded in? - Its already there. We can get rid of those sections.
-
 // We need to work around Step numbers here if we are going to potentially exclude the AMI subscription
 === Sign in to your AWS account
 
@@ -28,10 +20,6 @@ endif::marketplace_subscription[]
 // \Not to be edited
 
 === Launch the Quick Start
-
-WARNING: If you're deploying {partner-product-name} into an existing VPC, make sure that your VPC has two private subnets in different Availability Zones for the workload instances and that the subnets aren't shared. This Quick Start doesn't support https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html[shared subnets^]. These subnets require https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html[NAT gateways^] in their route tables to allow the instances to download packages and software without exposing them to the internet. Also make sure that the domain name option in the DHCP options is configured as explained in http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html[DHCP options sets^]. You provide your VPC settings when you launch the Quick Start.
-
-//TODO Shivansh, Should we keep any of this standard warning paragraph above, or delete the whole thing? - We can remove it.
 
 Each deployment takes about {deployment_time} to complete.
 
