@@ -4,6 +4,8 @@
 
 :xrefstyle: short
 
+//TODO Marcia, Can you compare the text in this section with the text of the same section in the following link. It seems to me that the following link has more details which is important to keep. https://aws-quickstart.github.io/quickstart-aws-industrial-machine-connectivity/#_industrial_machine_connectivity_on_aws
+
 The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value for a minimum viable product (MVP). For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop a complete production architecture that addresses all their critical use cases. 
 
 The {partner-product-short-name} Quick Start converts definitions of a customer's asset hierarchy (such as factory, lines, machines, tags) from third-party (AWS Partner) edge software applications to equivalent definitions in AWS IoT SiteWise. Partner edge applications include Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] and PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^].
@@ -15,7 +17,7 @@ After asset hierarchies are defined in AWS IoT SiteWise, your data can be ingest
 [link=images/imc_framework.png]
 image::../images/imc_framework.png[IMC Quick Start overview]
 
-//TODO Shivansh, Please supply the source file that Figure 1 was generated from.
+//TODO Shivansh, Please supply the source file that Figure 1 was generated from. - I have asked Thomas for the source file. I'll attach it to the sim as soon as I have it.
 
 //TODO When Marcia has this source file, will update this diagram to avoid saying "IMC framework". Per Shivansh, say "IMC QS" instead (but keep "ACM framework"). Other edits I'll make: Capitalize "Cloud" when it follows "AWS"; "near-real-time"; "plant floor" > "factory floor"; "historian" lowercase; label purple icon "Amazon QuickSight"; no key in lower-right corner.
 

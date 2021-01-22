@@ -142,7 +142,6 @@ First, verify that the Ignition trial period (2 hours) has not expired. If that 
 * If using KepServer for Windows, make sure that your default firewalls have been turned off. They prevent the AWS IoT SiteWise gateway certificates from showing up.
 
 
-
 *Can't access Ignition web UI*
 
 Ensure that you're attempting to connect from the same network you defined as your public IP while setting up the stack. If you're attempting from a different network, edit the security group associated with the two EC2 instances. (It's the same security group.)
@@ -165,7 +164,7 @@ Ensure that you're attempting to connect from the same network you defined as yo
 
 *Models and assets weren't created in AWS IoT SiteWise*
 
-If models and assets were not created in AWS IoT SiteWise and the Cirrus Link AMC driver was used, follow these steps to troubleshoot. Post-deployment Cirrus Link module configuration
+If models and assets were not created in AWS IoT SiteWise and the Cirrus Link AMC driver was used, follow these steps to troubleshoot.
 
 . Open the Ignition console, and navigate to MQTT transmission settings.
 
@@ -202,4 +201,25 @@ If these settings are as shown in <<ignition-mqtt-filtered>> and you're still re
 . Choose *View logs in CloudWatch*.
 . Click into the most recent log stream, and find the error message to troubleshoot.
 
-//TODO Shivansh, In the parameter tables following this section, in IMC-main.template.yaml under QSS3KeyPrefix, we say AllowedPattern: ^([0-9a-zA-Z-.]+/)*$. Are these parentheses above supposed to be here? We don't include parentheses for this parameter in IMC-workload.template.yaml or in this Quip: https://quip-amazon.com/lIOaA1eoAGDz/SigV4-Quick-Start-Changes.
+*Data from the MQTT transmission module doesn't show up in the IoT cloud*
+
+. Get the public IP address of that instance, and load a URL like this into any browser (replacing the information in brackets):
+
+ http://<hardwarePrivateIP>:8088
+
+. Open the Ignition web UI. Choose the gear-like icon on the left labeled *Config*. When prompted, log in. If you haven't already changed your password, do so after you've logged in. These are the default credentials:
+* User name: admin
+* Password: password (default password)
+. Choose *MQTT Transmission*, *Settings*, *Server*. Confirm that the connectivity shows 1 of 1. If it doesn't, choose *Edit* and do the following:
+.. Make sure that the URL is in the format: `ssl://<your_aws_account_iot_endpoint>:8883`
+.. Download the .tar.gz` file that represents the non-GreenGrass IoT thing from the following S3 bucket location (replacing the information in brackets):
+... Bucket name: `<stack_name>-devicesbucketresource-<hash>`
+... Key name: `<name_for_edge_device_parameter>/<name_for_edge_device_parameter>Device.tar.gz`
+.. Expand the tarball.
+.. Replace the CA certificate file with `root.ca.pem` from the tarball package.
+.. Replace the client certificate file with the `.pem` file from the tarball package.
+.. Replace the client private key file with the `.private` file from the tarball package.
+.. Choose *Save Changes*, and make sure that the connectivity says *1 of 1*.
+
+
+//TODO Shivansh, In the parameter tables following this section, in IMC-main.template.yaml under QSS3KeyPrefix, we say AllowedPattern: ^([0-9a-zA-Z-.]+/)*$. Are these parentheses above supposed to be here? We don't include parentheses for this parameter in IMC-workload.template.yaml or in this Quip: https://quip-amazon.com/lIOaA1eoAGDz/SigV4-Quick-Start-Changes. - Fixed.
