@@ -28,3 +28,5 @@ This Quick Start includes the software and a list of hardware required to connec
 ** KEPServerEX Project File Export
 
 You deploy this Quick Start in either virtual mode (for evaluation and training) or physical mode (for customer deployments). The mode you choose depends on whether your edge hardware is virtual or physical. The architecture for virtual edge hardware includes an Amazon Elastic Compute Cloud (Amazon EC2) instance. The architecture for physical edge hardware includes an industrial PC. The mode determines the way you configure connectivity and security. All other cloud-based resources are largely the same for virtual and physical deployments.
+
+As an option, you can use Amazon Simple Storage Service Glacier (https://aws.amazon.com/glacier/[Amazon S3 Glacier^]) to help provide secure, durable, low-cost data archiving and long-term backup.

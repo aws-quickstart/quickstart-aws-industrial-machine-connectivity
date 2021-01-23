@@ -31,7 +31,7 @@ include::./post_deployment.adoc[]
 
 === Additional resources
 
-* https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/develop/assets/readme/amc.md[Asset Model Converter(AMC) and creating AMC drivers]
+* https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/develop/assets/readme/amc.md[Asset Model Converter (AMC) and creating AMC drivers]
 * https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/develop/assets/readme/additional-info.md#amc-approved-dynamodb-format[AMC approved DyanamoDB table format]
 * https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/develop/assets/readme/additional-info.md#add-a-line-and-device-to-an-ignition-project[Adding a line and device to an Ignition project]
 * https://github.com/aws-quickstart/quickstart-aws-industrial-machine-connectivity/blob/develop/assets/readme/additional-info.md#setting-up-a-quicksight-dashboard-along-with-the-imc-quick-start-deployment[Setting up a QuickSight dashboard]
