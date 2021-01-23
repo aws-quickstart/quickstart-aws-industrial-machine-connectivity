@@ -4,7 +4,7 @@
 
 :xrefstyle: short
 
-The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value for a minimum viable product (MVP). For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop a complete production architecture that addresses all their critical use cases. 
+The primary objective of the Quick Start is to help partners deliver an inexpensive proof of value from their IIoT solution. For example, a partner might deliver a deployment that helps a customer visualize near-real-time operational metrics and analyze root causes when a line goes down. When customers get a taste of deriving business value from their IIoT architecture, they want to go further to develop a complete production architecture that addresses all their critical use cases. 
 
 At the heart of the {partner-product-short-name} Quick Start is the Asset Model Converter (AMC). The AMC is a serverless, module-based framework. It automatically converts definitions of a customer's asset hierarchy (such as factory, lines, machines, tags) from third-party (AWS Partner) edge software applications to equivalent definitions in AWS IoT SiteWise models and assets. Partner edge applications include Inductive Automation's https://inductiveautomation.com/ignition/[Ignition^] and PTC's https://www.kepware.com/en-us/products/kepserverex/[KEPServerEX^].
 
@@ -12,8 +12,8 @@ After asset hierarchies are defined in AWS IoT SiteWise, your data can be ingest
 
 [#IMC-QS-overview]
 .Overview of the {partner-product-name} Quick Start
-[link=images/imc_framework.png]
-image::../images/imc_framework.png[IMC Quick Start overview]
+[link=images/imc_qs_overview.png]
+image::../images/imc_qs_overview.png[IMC Quick Start overview]
 
 The {partner-product-short-name} Quick Start helps connect industrial assets to AWS Cloud services along with visualizing data using AWS IoT SiteWise Monitor and Amazon QuickSight dashboards. The IoT partner edge software applications handle the industrial protocol translation from the programmable logic controllers (PLCs), other devices, historians, and supervisory control and data acquisition (SCADA) systems they connect to. The {partner-product-short-name} architecture integrates both the data collected by the edge software applications and the asset model hierarchy that they maintain. 
 
