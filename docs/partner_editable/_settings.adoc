@@ -2,7 +2,7 @@
 :partner-product-name: Industrial Machine Connectivity
 :partner-product-short-name: IMC
 //:partner-company-name:
-:doc-month: January
+:doc-month: February
 :doc-year: 2021
 :partner-contributors: Thomas Cummins, AWS IoT Partner team
 :quickstart-contributors: Shivansh Singh, AWS Quick Start team
